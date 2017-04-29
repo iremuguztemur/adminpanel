@@ -10,5 +10,7 @@
 
 <script src="<?=panel_asset_url('/js/common.js')?>"></script>
 <script src="<?=panel_asset_url('/js/redirect.js')?>"></script>
+<script src="<?=panel_asset_url('/js/jquery-form.js')?>"></script>
+<script src="<?=panel_asset_url('/js/imageupload.js')?>"></script>
 </body>
 </html>
