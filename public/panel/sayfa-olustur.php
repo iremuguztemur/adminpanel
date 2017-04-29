@@ -1,1 +1,0 @@
-<h1>Sayfa Oluştur</h1>

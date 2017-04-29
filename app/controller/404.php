@@ -1,12 +1,16 @@
 <?php
-$module = $_url[0];
 
+if(!file_exists(view($modal))){
+  	$page = '404';
+}else{
+	$page = $modal;
+}
 
-# headeri getir
-require view("includes/header");
+# call header
+require statics("header");
 
-#içeriği çağır
-require view($module);
+# call page content çağır
+require view($page);
 
-# footeri getir
-require view("includes/footer");
+# call footer getir
+require statics("footer");

@@ -1,12 +1,64 @@
 <?php
 
-$module = '404';
-if( $_url[0] )
-	$module = $_url[0];
-else{
-	$module = '404';
+if(!url(1)){
+	$_url[1] = 'index';
 };
 
 
-# headeri getir
-require panel_controller("index");
+
+$config['menu'] = [
+  'pages' => [
+    'title' => 'Sayfalar',
+    'icon' => 'icmn-files-empty2',
+    'submenu' => [
+      'pages' => [
+        'title' => 'Sayfalar'
+      ],
+      'new-page' => [
+        'title' => 'Sayfa Ekle'
+      ]
+    ]
+  ],
+  'products' => [
+    'title' => 'Ürünler',
+    'icon' => 'icmn-store',
+    'submenu' => [
+      'products' => [
+        'title' => 'Tüm Ürünler'
+      ],
+      'new-product' => [
+        'title' => 'Ürün Ekle'
+      ]
+    ]
+  ],
+  'banners' => [
+    'title' => 'Banner Yönetimi',
+    'icon' => 'icmn-image-compare',
+    'submenu' => [
+      'banners' => [
+        'title' => 'Bannerlar'
+      ],
+      'new-banner' => [
+        'title' => 'Banner Ekle'
+      ]
+    ]
+  ],
+  'settings' => [
+    'title' => 'Ayarlar',
+    'icon' => 'icmn-cog5 util-spin-delayed-pseudo'
+  ],
+  'logout' => [
+    'title' => 'Çıkış Yap',
+    'icon' => 'icmn-cancel'
+  ]
+];
+
+if (!file_exists(panel_controller(url(1)))){
+  $_url[1] = 'index';
+};
+
+if(!control_session('login')){
+	$_url[1] = 'login';
+}
+
+require panel_controller(url(1));

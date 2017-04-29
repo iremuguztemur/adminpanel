@@ -425,11 +425,11 @@ class BasicDB extends \PDO
     public function showPagination($url, $class = 'active')
     {
         if ($this->totalRecord > $this->paginationLimit) {
-            for ($i = $this->page - 5; $i < $this->page + 5 + 1; $i ++) {
+            for ($i = $this->page - 5; $i < $this->page + 6 + 1; $i ++) {
                 if ($i > 0 && $i <= $this->pageCount) {
-                    $this->html .= '<li class="';
+                    $this->html .= '<li class="page-item ';
                     $this->html .= ($i == $this->page ? $class : null);
-                    $this->html .= '"><a href="' . str_replace('[page]', $i, $url) . '">' . $i . '</a>';
+                    $this->html .= '"><a class="page-link" href="' . str_replace('[page]', $i, $url) . '">'. $i .'</a>';
                 }
             }
             return $this->html;

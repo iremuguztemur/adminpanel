@@ -1,21 +1,17 @@
 <?php
-$module = '404';
-if( isset($_url[1]) )
-	$module = $_url[1];
-else{
-	$module = "index";
-};
 
-if(!file_exists(panel_view($module))){
-	$module = '404';
+if(!file_exists(panel_view($_url[1]))){
+  	$page = '404';
+}else{
+	$page = $_url[1];
 }
 
+# call header
+require panel_statics("header");
+require panel_statics("sidebar");
 
-# headeri getir
-require panel_view("includes/header");
+# call page content
+require panel_view($page);
 
-#içeriği çağır
-require panel_view($module);
-
-# footeri getir
-require panel_view("includes/footer");
+# call footer
+require panel_statics("footer");

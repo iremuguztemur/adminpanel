@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,eAAgB,GACd,aAAa,EAAE,YAAW",
-"sources": ["../scss/master.scss"],
-"names": [],
-"file": "master.css"
-}

@@ -1,40 +1,49 @@
-<?php 
-/*
-	yapılandırma sayfası
-		## veri tabanı bağlantı bilgileri
-        ## açılış dili seçme işlevi
-		## sabit değişkenler
-*/
-# bağlantı bilgileri
+<?php
+/**
+	Delta Ajan Web Site System v:1.2
+	Create by : Delta Ajans
+	User : Taner Tombaş <taner@deltaajans.xyz> - <tombastaner@gmail.com>
+
+	{ SYSTEM PAGE [ GENERAL SETTINGS ] }
+		-> About database connection 
+		-> First load language selected
+		-> Constant variables
+**/
 $config = array();
 
+#database connect veriables example : ( $config['db']['host'] ) [ - LOCALhOST - ]
 $config['db'] = [
   'host' => 'localhost',
   'name' => 'deltaajans',
   'user' => 'root',
   'pass' => ''
 ];
-/*
+
+/* 
+#database connect veriables example : ( $config['db']['host'] ) [ - SERVER - ] 
 $config['db'] = [
-	'host' => 'localhost',
-	'name' => 'deltaaja_demo_engizpide',
-	'user' => 'deltaaja_engizsg',
-	'pass' => 'pq=,*,iL7r50'
+  'host' => 'localhost',
+  'name' => 'samsunsegman',
+  'user' => 'root',
+  'pass' => ''
 ];
 */
 
-# açılış dili seçecek
+# first opening language
 $config['default_language'] = 'tr';
 
-# bütün sayfalarda kullanılacak olan değişkenler
-define('bdir', realpath('.')); // @todo:: basedir site dosya başlangıcı
+# static veriable's [ directory ]
+define('_base', realpath('.')); #[ system root ]
+define('_condir', _base.'/app/controller');  //@todo:: [ app/controller ]
+define('_public', _base.'/public');  //@todo:: [ _base/public ]
+define('_inc', _base.'/public/include');  //@todo:: [ _base/public/include ] ( file catch )
 
-//@todo:: site url :burada .explode("/",$_SERVER['SCRIPT_NAME'])[1]."/ bölümü yayına alınırken kaldırılacaktır.
-define('surl', "http://".$_SERVER['SERVER_NAME']."/".explode("/",$_SERVER['SCRIPT_NAME'])[1]."/");
-define('contdir', bdir.'/app/controller');  //@todo:: bdir   -> controller klasörü veri yolu
-define('inc', bdir.'/public/includes/');    //@todo:: inc    -> include edilecek dosyaların veri yolu
-define('pubdir', bdir.'/public');           //@todo:: pubdir -> public klasörünün veri yolu
-define('updir', surl.'upload');             //@todo:: updir  -> sayfaya panelden yüklenen dosyaların (resim,pdf) veri yolu
-define('ajdir', surl.'ajax/');              //@todo:: ajdir  -> sayfada kullanılan ajax dosysalarının veri yolu.
+# static veriable's [ browser url ]
+define('_siteurl', "http://".$_SERVER['SERVER_NAME']."/".explode("/",$_SERVER['SCRIPT_NAME'])[1]); #[ page browser url / folder name catch ]
+define('_upload', _siteurl."/upload/");
+define('_updocs', _siteurl."/upload/docs/");
+define('_ajax', _siteurl."/ajax/");
 
-/* END THE PAGE */
+/*
+  END THE CODE | END THE PAGE
+*/

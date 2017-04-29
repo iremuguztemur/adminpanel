@@ -1,40 +1,38 @@
 <?php
-	# gereklileri başlat.
-	session_start();
-	ob_start();
+/**
+	Delta Ajan Web Site System v:1.2
+	Create by : Delta Ajans
+	User : Taner Tombaş <taner@deltaajans.xyz> - <tombastaner@gmail.com>
 
-	# app dizin istemcisini çağır.
-	require_once("app/init.php");
+	This page works :
 
-	# urlden gelen get değerini fonksiyondan geçir ve parçala
-	$_url = get('url'); #todo:: app/helpers/url
-	$_url = array_filter(explode('/', $_url));
+		-> filter the url [ get system ]
+		-> security control [ url sql inject control, form spam control ]
+		-> url parser !
 
-	# eğer url de gelen bir sayfa yoksa ( ilk açılış için ! )
-	if(!isset($_url[0]))
-		$_url[0] = 'index';
+**/
+/* todo::@php errors */
+error_reporting(E_ALL);
+session_start();
+ob_start();
 
-	# eğer çağırılan sayfa klasörde yok ise
-	if (!file_exists(controller($_url[0])))
-		$_url[0] = '404';
+global $modal;
 
-#sayfa güvenlik kontrolü
-	# Bakım Modu kontrolü.
-	if($val['bakim'] != 0){
-		$_url[0] = guvenlik::control_this_page('bakimmodu',0,1);
-	};
-	# kullanıcı tarafından site kapalı açık kontrolü.
-	if($val['aktif'] != 1){
-		$_url[0] = guvenlik::control_this_page('sitekapali',0,1);
-	};
+/* todo:: App Directory Client */
+require_once("app/init.php");
 
-# lisans sistemi başlat !
-	if($val['lisans_kodu'] == ''){
-		$_url[0] = licanse::lisans_yok();
-	}
+# url function [ catch callback urls ]
+$_url = get('url');
+$_url = array_filter(explode('/', $_url));
 
+if(!isset($_url[0]))
+	$modal = 'index';
+else
+	$modal = $_url[0];
 
+# If there are no files
+if (!file_exists(controller($modal)))
+	$modal = '404';
 
-
-# sayfayı çağır
-	require_once(controller($_url[0]));
+#call the page 
+require_once(controller($modal));
