@@ -23,7 +23,7 @@ function panel_url($url = null){
 
 #random char generator !
 function mbs_rand( $charLength="20" ){
-	$key = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	$chLn = strlen($key);
 	$randKey='';
 	for ($i = 0; $i < $charLength; $i++) {

@@ -1,18 +1,31 @@
 <section class="page-content">
-    <form action="<?=panel_url($_url[1]."/".$_url[2])?>" method="post">
+    <form action="<?=panel_url($_url[1]."/".$_url[2]."/".url(3))?>" method="post">
     <section class="page-content-inner">
         <section class="panel panel-with-borders col-md-10">
             <div class="panel-heading">
-                <h3>Grup Ekle</h3>
+                <h3>Alt Kategori Ekle <small>( <?=$group['group_name']?> )</small></h3>
             </div>
             <form action="" method="post">
             <div class="panel-body">
 				<form name="sayfa_form" action="" method="post" id="form1">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="row">
 							<div class="form-group">
-								<label for="">Grup Adı :</label>
-								<input type="text" name="group_name" class="form-control" required>
+								<label for="">Kategori :</label>
+                                <select name="categori_id" class="form-control" id="categori_id" required>
+                                    <option value="">Kategori Seçiniz</option>
+									<?php foreach ($group_list as $gl){?>
+                                        <option value="<?=$gl['categori_id']?>" <?php echo $gl['categori_id'] == $id ? "selected" : "" ; ?>><?=$gl['categori_name']?></option>
+									<?php }; ?>
+                                </select>
+							</div>
+							<div class="form-group">
+								<label for="">Alt Kategori Adı :</label>
+								<input type="text" name="subcategori_name" class="form-control" required />
+							</div>
+							<div class="form-group">
+								<label for="">Açıklama :</label>
+                                <textarea name="subcategori_description" class="form-control" rows="10"></textarea>
 							</div>
                             <input type="hidden" name="images" class="form-control">
 						</div>
@@ -79,8 +92,9 @@ $(document).ready(function () {
     },{
         type: '<?=$cb["err"]["type"]?>'
     });
+
     setTimeout(function () {
-        location.href = '<?=panel_url("product-group")?>';
+        location.href = '<?=panel_url("product-subcategori/"."categori_".mbs_rand(4).$select_categori['categori_id']."-".mbs_rand(4))?>';
     },1500)
 })
 </script>

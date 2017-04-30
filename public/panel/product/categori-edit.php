@@ -1,18 +1,35 @@
 <section class="page-content">
-    <form action="<?=panel_url($_url[1]."/".$_url[2])?>" method="post">
+    <form action="<?=panel_url($_url[1]."/".$_url[2]."/".url(3))?>" method="post">
     <section class="page-content-inner">
         <section class="panel panel-with-borders col-md-10">
             <div class="panel-heading">
-                <h3>Grup Ekle</h3>
+                <h3>Kategori Düzenle</h3>
             </div>
             <form action="" method="post">
             <div class="panel-body">
 				<form name="sayfa_form" action="" method="post" id="form1">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="row">
 							<div class="form-group">
-								<label for="">Grup Adı :</label>
-								<input type="text" name="group_name" class="form-control" required>
+								<label for="">Grup :</label>
+                                <select name="group_id" class="form-control" id="group_id" required>
+                                    <option value="">Grup Seçiniz</option>
+									<?php foreach ($group_list as $gl){
+										if(isset($_url[2])){
+											?>
+                                            <option value="<?=$gl['group_id']?>" <?php  echo $edit['group_id'] == $gl['group_id'] ? "selected" : ""; ?> ><?=$gl['group_name']?></option>
+										<?php }else { ?>
+                                            <option value="<?=$gl['group_id']?>"><?=$gl['group_name']?></option>
+										<?php }; }; ?>
+                                </select>
+							</div>
+							<div class="form-group">
+								<label for="">Kategori Adı :</label>
+								<input type="text" name="categori_name" class="form-control" value="<?=$edit['categori_name']?>" required>
+							</div>
+							<div class="form-group">
+								<label for="">Açıklama :</label>
+                                <textarea name="categori_description" class="form-control" rows="10"><?=$edit['categori_description']?></textarea>
 							</div>
                             <input type="hidden" name="images" class="form-control">
 						</div>
@@ -25,9 +42,9 @@
 			<section class="panel panel-with-borders ">
 				<div class="panel-heading" style="padding:10px">
 						<button type="submit" class="btn btn-primary" href="#add_image" style="padding:5px; font-size : 13px;">
-							Yayımla
+							Güncelle
 						</button>
-						<button class="btn btn-warning pull-right" href="#add_image" style="padding:5px; font-size : 13px;">
+						<button class="btn btn-warning pull-right disabled" disabled href="#add_image" style="padding:5px; font-size : 13px;">
 							Taslak Olarak Kaydet
 						</button>
 				</div>
@@ -80,7 +97,7 @@ $(document).ready(function () {
         type: '<?=$cb["err"]["type"]?>'
     });
     setTimeout(function () {
-        location.href = '<?=panel_url("product-group")?>';
+        location.href = '<?=panel_url("product-categori/"."categori_".mbs_rand(4).$edit['group_id']."-".mbs_rand(4))?>';
     },1500)
 })
 </script>

@@ -3,16 +3,29 @@
     <section class="page-content-inner">
         <section class="panel panel-with-borders col-md-10">
             <div class="panel-heading">
-                <h3>Grup Ekle</h3>
+                <h3>Kategori Ekle</h3>
             </div>
             <form action="" method="post">
             <div class="panel-body">
 				<form name="sayfa_form" action="" method="post" id="form1">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="row">
 							<div class="form-group">
-								<label for="">Grup Adı :</label>
-								<input type="text" name="group_name" class="form-control" required>
+								<label for="">Grup :</label>
+                                <select name="group_id" class="form-control" id="group_id" required>
+                                    <option value="">Grup Seçiniz</option>
+                                    <?php foreach ($group_list as $gl){?>
+                                    <option value="<?=$gl['group_id']?>"><?=$gl['group_name']?></option>
+                                    <?php }; ?>
+                                </select>
+							</div>
+							<div class="form-group">
+								<label for="">Kategori Adı :</label>
+								<input type="text" name="categori_name" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label for="">Açıklama :</label>
+                                <textarea name="categori_description" class="form-control" rows="10"></textarea>
 							</div>
                             <input type="hidden" name="images" class="form-control">
 						</div>
@@ -80,7 +93,7 @@ $(document).ready(function () {
         type: '<?=$cb["err"]["type"]?>'
     });
     setTimeout(function () {
-        location.href = '<?=panel_url("product-group")?>';
+        location.href = '<?=panel_url("product-categori")?>';
     },1500)
 })
 </script>

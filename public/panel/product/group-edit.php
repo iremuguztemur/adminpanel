@@ -1,9 +1,9 @@
 <section class="page-content">
-    <form action="<?=panel_url($_url[1]."/".$_url[2])?>" method="post">
+    <form action="<?=panel_url($_url[1]."/".$_url[2]."/".url(3))?>" method="post">
     <section class="page-content-inner">
         <section class="panel panel-with-borders col-md-10">
             <div class="panel-heading">
-                <h3>Grup Ekle</h3>
+                <h3>Grup Düzenle <small>[ <?=$sei['group_name']?> ]</small></h3>
             </div>
             <form action="" method="post">
             <div class="panel-body">
@@ -12,9 +12,9 @@
 						<div class="row">
 							<div class="form-group">
 								<label for="">Grup Adı :</label>
-								<input type="text" name="group_name" class="form-control" required>
+								<input type="text" name="group_name" class="form-control" value="<?=$sei['group_name']?>" required>
 							</div>
-                            <input type="hidden" name="images" class="form-control">
+                            <input type="hidden" name="images" value="<?=$sei['group_image']?>" class="form-control">
 						</div>
 					</div>
 				</form>
@@ -25,9 +25,9 @@
 			<section class="panel panel-with-borders ">
 				<div class="panel-heading" style="padding:10px">
 						<button type="submit" class="btn btn-primary" href="#add_image" style="padding:5px; font-size : 13px;">
-							Yayımla
+							Güncelle
 						</button>
-						<button class="btn btn-warning pull-right" href="#add_image" style="padding:5px; font-size : 13px;">
+						<button disabled class="btn btn-warning pull-right disabled" href="#add_image" style="padding:5px; font-size : 13px;">
 							Taslak Olarak Kaydet
 						</button>
 				</div>

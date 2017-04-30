@@ -29,9 +29,6 @@ $config['menu'] = [
       'product-categori' => [
         'title' => 'Kategoriler'
 			],
-      'product-subcategori' => [
-        'title' => 'Alt Kategoriler'
-			],
       'products' => [
         'title' => 'Ürünler'
       ],
