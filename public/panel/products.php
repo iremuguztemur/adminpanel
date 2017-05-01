@@ -11,57 +11,43 @@
                   <div class="row">
                       <div class="col-md-3">
                         <label for="kategori">Ürün Kategorisi</label>
-                          <select class="form-control" name="kategori">
+                          <select class="form-control" name="product_categori" id="product_categori">
                               <option value="#">Ürün Kategorisini Seçin</option>
-                              <optgroup label="Ofis Mobilyaları">
-                                    <option value="1">Yönetici Grupları</option>
-                                    <option value="2">Çalışma Grupları</option>
-                                    <option value="3">Toplantı Masaları</option>
-                                    <option value="4">Dolaplar & Kitaplıklar</option>
-                                    <option value="5">Oturma Grupları</option>
-                                    <option value="6">İlave Modüller</option>
+                              <?php foreach ($group_list as $pl){
+	                              $categori_list = $db->select("product_categori")->where("group_id",$pl['group_id'])->orderby("categori_id","ASC")->run();
+                              ?>
+                              <optgroup label="<?=$pl['group_name']?>">
+                                  <?php foreach ( $categori_list as $cl ){ ?>
+                                      <?php if( isset($c)){ ?>
+                                          <option value="<?=$cl['categori_id']?>" <?php echo $cat_id == $cl['categori_id'] ? "selected" : "";  ?>  ><?=$cl['categori_name']?></option>
+                                      <?php }else{ ?>
+                                          <option value="<?=$cl['categori_id']?>"  ><?=$cl['categori_name']?></option>
+
+                                      <?php } ?>
+                                  <?php }; ?>
                               </optgroup>
-                              <optgroup label="Eğitim Mobilyaları">
-                                    <option value="7">Okul Sıraları</option>
-                                    <option value="8">Amfi Sıraları</option>
-                                    <option value="9">Öğretmen Kürsüleri</option>
-                                    <option value="10">Sınıf Dolapları</option>
-                                    <option value="11">Kitaplıklar</option>
-                                    <option value="12">Diğer Ürünler</option>
-                              </optgroup>
-                              <optgroup label="Endüstriyel Ekipmanlar">
-                                    <option value="13">Malzeme & Takım Dolapları</option>
-                                    <option value="14">Takım Arabaları</option>
-                                    <option value="15">Çalışma Tezgahları</option>
-                              </optgroup>
-                              <optgroup label="Depolama & Arşiv">
-                                    <option value="16">Compact Arşiv Sistemleri</option>
-                                    <option value="17">Raf Sistemleri</option>
-                              </optgroup>
-                              <optgroup label="Yurt & Konaklama">
-                                    <option value="18">Karyola & Ranzalar</option>
-                                    <option value="19">Elbise Dolapları</option>
-                                    <option value="20">İlave Modüller</option>
-                              </optgroup>
+                                <?php }; ?>
                           </select>
                       </div>
+	                  <?php if(isset($c) && ( $c == 'categori' || $c == 'subcategori' ) ){ ?>
                       <div class="col-md-3">
-                        <label for="grup">Ürün Grup</label>
-                          <select class="form-control" name="grup">
-                              <option value="#">Ürün Grubu Seçin</option>
-                              <option value="1">Style</option>
-                              <option value="2">Optimus</option>
+                        <label for="grup">Ürün Alt Kategori</label>
+                          <select class="form-control" name="product_subcategori" id="product_subcategori">
+                              <option value="#">Ürün Alt Kategori Seçin</option>
+                                <?php foreach ( $listAlt as $sc ){ ?>
+                                    <option value="<?=$sc['subcategori_id']?>"  <?php echo ($c == 'subcategori' && $sc['subcategori_id'] == $id ) ? "selected" : "" ; ?> ><?=$sc['subcategori_name']?></option>
+                                <?php }; ?>
                           </select>
                       </div>
+	                  <?php } ?>
                   </div>
               </div>
       				<table class="table table-hover nowrap" id="sayfalar" width="100%">
       					<thead>
       					<tr>
-      						<th>Fotoğraf</th>
-      						<th>Kategori</th>
+      						<th>DMO Kodu</th>
+      						<th>Ürün Kodu</th>
       						<th>Ürün Adı</th>
-      						<th>Açıklama</th>
       						<th>Durum</th>
       						<th class="text-right">İşlem</th>
       					</tr>
@@ -73,22 +59,11 @@
       						<th></th>
       						<th></th>
       						<th></th>
-      						<th></th>
       					</tr>
       					</tfoot>
       					<tbody>
       					<?php
       					foreach($pagelist as $pl ){
-      						// img control
-      						if($pl['image'] != ''){
-      							$imgx = explode(",",$pl['image'])[0];
-      							$image = $db->select("img_library")
-      									 ->where("img_id", $imgx)
-      									 ->run(true);
-      							$img = $image['image_name'];
-      						}else{
-      							$img = 'https://placeholdit.imgix.net/~text?txtsize=10&txt=Sayfa%20Resmi%20bulunamad%C4%B1&w=80&h=70';
-      						};
       						// stats control
       						if($pl['stats'] == 1){
       							$stat = '<span class="label label-success">aktif</span>';
@@ -97,7 +72,7 @@
       						}else {
       							$stat = '<span class="label label-danger">pasif</span>';
       						};
-      						$id = "page_".mbs_rand(4).$pl['page_id']."-".mbs_rand(4);
+      						$idx = "product_".mbs_rand(4).$pl['product_id']."-".mbs_rand(4);
       						/*
       							---> examle securty id parse  |
       							------------------------------|
@@ -106,27 +81,23 @@
       							$run = substr($x,4);
       						*/
       					?>
-      					<tr height="30">
-      						<td><img src="<?=$img?>" class="img-responsive" alt="<?=$pl['page_name']?>"></td>
-      						<td><?=$pl['add_date']?></th>
-      						<td><?=$pl['page_name']?></td>
-      						<td><?=$pl['page_description']?></td>
+      					<tr>
+      						<td><?=$pl['dmo_code']?></td>
+      						<td><?=$pl['product_code']?></td>
+      						<td><?=$pl['product_name']?></td>
       						<td><?=$stat?></td>
       						<td class="text-right">
-      							<a href="page/<?php if($stat != 'aktif'){ echo "active"; }else{ echo "passive"; }; ?>/<?=$id?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($stat != 'aktif'){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
+      							<a href="product/<?php if($stat != 0){ echo "active"; }else{ echo "passive"; }; ?>/<?=$idx?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($stat != 0){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
       							<?php if($stat == 'aktif'){ ?>
       								<i class="fa fa-eye"></i>
       							<?php }else { ?>
       								<i class="fa fa-eye-slash"></i>
       							<?php }; ?>
       							</a>
-      							<a href="page/list/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Alt Sayfa Listesi">
-      								<i class="fa fa-list"></i>
-      							</a>
-      							<a href="page/edit/<?=$id?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">
+      							<a href="product/edit/<?=$idx?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">
       								<i class="fa fa-pencil"></i>
       							</a>
-      							<a href="page/delete/<?=$id?>" class="label label-danger" style="margin-left : 3px; padding:4px 8px;" title="Sil">
+      							<a href="product/delete/<?=$idx?>" class="label label-danger" style="margin-left : 3px; padding:4px 8px;" title="Sil">
       								<i class="fa fa-trash"></i>
       							</a>
       						</td>
@@ -154,7 +125,7 @@ $(document).ready(function(){
 	    ],
 		language: {
             lengthMenu 	: "",
-            zeroRecords : "Sayfa Bulunamadı",
+            zeroRecords : "Ürün Bulunamadı",
             info		: "",
             infoEmpty	: "",
             infoFiltered: "",
@@ -166,5 +137,56 @@ $(document).ready(function(){
 			}
         },
 	});
+
+	/*--------------- */
+
+    $("#product_categori").on("change",function () {
+        var ti = $(this).val();
+        if(ti == ""){
+            $id = "";
+        }else{
+            $id = "categori_<?=mbs_rand(4)?>" + ti + "-<?=mbs_rand(4)?>";
+            location.href = "<?=panel_url("products/")?>"+$id;
+        }
+    });
+
+    /*--------------- */
+
+    $("#product_subcategori").on("change",function () {
+        var ti = $(this).val();
+        if(ti == ""){
+            $id = "";
+        }else{
+            $id = "subcategori_<?=mbs_rand(4)?>" + ti + "-<?=mbs_rand(4)?>";
+            location.href = "<?=panel_url("products/")?>"+$id;
+        }
+    });
+
 });
 </script>
+<?php if(isset( $_url[3] )){
+echo $_url[3];
+if($_url[3] == 'basarili'){
+?>
+<script>
+$(document).ready(function () {
+    $.notify({
+        title: '<strong>Başarılı</strong>,',
+        message: 'İşlem başarılı bir şekilde gerçekleştirilmiştir.'
+    },{
+        type: 'success'
+    });
+})
+</script>
+<?php }else{ ?>
+    <script>
+        $(document).ready(function () {
+            $.notify({
+                title: '<strong>Hata</strong>,',
+                message: 'İşlem sırasında bir hata oluştu.'
+            },{
+                type: 'danger'
+            });
+        })
+    </script>
+<?php    }; }; ?>

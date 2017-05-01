@@ -35,7 +35,6 @@ if( $_POST ){
 
 		if($v['categori_name'] != ''){
 			$insert = $db->insert("product_categori") ->set($v);
-
 			if( $insert ){
 				$cb['err']['title'] = "Başarılı: ";
 				$cb['err']['message'] = "Kategori başarılı bir şekilde eklenmiştir.";

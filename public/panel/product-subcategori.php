@@ -80,7 +80,7 @@
       								<i class="fa fa-eye-slash"></i>
       							<?php }; ?>
       							</a>
-      							<a href="<?=panel_url()?>product-categori/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Ürün Listesi">
+      							<a href="<?=panel_url()?>products/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Ürün Listesi">
       								<i class="fa fa-list"></i>
       							</a>
       							<a href="<?=panel_url()?>product/subcategori-edit/<?=$id?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">

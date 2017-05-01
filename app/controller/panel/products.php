@@ -5,8 +5,32 @@ if(!file_exists(panel_view($_url[1]))){
 }else{
 	$page = $_url[1];
 }
-# page List Call
-$pagelist = $db->select("pages")->run();
+$group_list = $db->select("product_group")->orderby("group_id","ASC")->run();
+if( isset( $_url[2] ) ){
+
+	$getid = url(2);
+	$r =  explode("_",$getid)[1];
+	$c = explode("_",$getid)[0];
+	$x = explode("-",$r)[0];
+	$id = substr($x,4);
+
+	if($c == 'categori'){
+		$pagelist = $db->select("products")->where("product_categori_id",$id)->run();
+		$subList = $db->select("product_categori")->where("categori_id",$id)->run(true);
+	}elseif ($c == 'subcategori'){
+		$pagelist = $db->select("products")->where("product_subcategori_id",$id)->run();
+		$subList = $db->select("product_subcategori")->where("subcategori_id",$id)->run(true);
+	}
+	$cat_id = $subList['categori_id'];
+
+	#!!
+	$listAlt = $db->select("product_subcategori")->where("categori_id",$subList['categori_id'])->run();
+
+}else{
+	# page List Call
+	$pagelist = $db->select("products")->run();
+}
+
 
 # call header
 require panel_statics("header");

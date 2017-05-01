@@ -32,7 +32,7 @@ $config['menu'] = [
       'products' => [
         'title' => 'Ürünler'
       ],
-      'new-product' => [
+      'product/new-product' => [
         'title' => 'Ürün Ekle'
       ]
     ]

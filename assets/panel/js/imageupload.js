@@ -30,15 +30,12 @@ function handleFileSelect(evt) {
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
 $(document).ready(function(){
 
-    var say = $("#onizleme").find("img").length;
-    $("form#imgUpload").ajaxForm({
-      uploadProgress : function(olay, yuklenen, toplam, yuzde){
-        $(".progress-bar").css({
-          width : yuzde + "%"
-        });
-        $("#progress-wrp .status").html(yuzde + "%");
-      }
-    })
+var say = $("#onizleme").find("img").length;
+$(".resim").on("change",function () {
+    var url = $.ajaxUrl;
+    $(".tamamla").trigger("click");
+
+})
 });
 
 

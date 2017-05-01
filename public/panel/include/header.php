@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="<?=panel_asset_url('sweetalert/dist/sweetalert.css')?>">
 	<link rel="stylesheet" href="<?=panel_asset_url('datatables/media/css/dataTables.bootstrap4.min.css')?>">
 	<link rel="stylesheet" href="<?=panel_asset_url('datatables/media/css/dataTables.bootstrap4.min.css')?>">
+	<link rel="stylesheet" href="<?=panel_asset_url('summernote/dist/summernote.css')?>">
+	<link rel="stylesheet" href="<?=panel_asset_url('select2/dist/css/select2.min.css')?>">
+	<link rel="stylesheet" href="<?=panel_asset_url('clupload/css/clupload.css')?>">
+
     <!-- Clean UI Styles -->
     <link rel="stylesheet" type="text/css" href="<?=panel_asset_url('css/source/main.css')?>">
     <script src="<?=panel_asset_url('jquery/jquery.min.js')?>"></script>
