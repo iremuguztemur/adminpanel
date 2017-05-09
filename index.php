@@ -1,6 +1,6 @@
 <?php
-/**
-	Delta Ajan Web Site System v:1.2
+/*
+	Delta Ajans Web Site System v:1.2
 	Create by : Delta Ajans
 	User : Taner Tombaş <taner@deltaajans.xyz> - <tombastaner@gmail.com>
 
@@ -10,7 +10,7 @@
 		-> security control [ url sql inject control, form spam control ]
 		-> url parser !
 
-**/
+*/
 /* todo::@php errors */
 error_reporting(E_ALL);
 session_start();
@@ -34,5 +34,5 @@ else
 if (!file_exists(controller($modal)))
 	$modal = '404';
 
-#call the page 
+#call the page
 require_once(controller($modal));

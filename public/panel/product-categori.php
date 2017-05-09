@@ -2,24 +2,9 @@
     <section class="page-content-inner">
         <section class="panel panel-with-borders">
             <div class="panel-heading">
-                <h3>Ürün Kategorileri <a href="<?=panel_url('product/new-categori')?>" class="btn btn-success pull-right padding-5" title="Yeni Kategori Ekle"><i class="fa fa-plus margin-right-10"></i>Yeni Kategori Ekle</a></h3>
+                <h3>Ürün Kategorileri <a href="<?=panel_url('product/new-categori')?>" class="btn btn-success pull-right padding-5"><i class="fa fa-plus margin-right-10"></i>Yeni Kategori Ekle</a></h3>
             </div>
             <div class="panel-body">
-                <h4>Filtre : </h4>
-                <div class="col-md-4 margin-bottom-20">
-                    <div class="row">
-                        <select name="group_id" class="form-control" id="group_id" required>
-                            <option value="">Grup Seçiniz</option>
-		                    <?php foreach ($group_list as $gl){
-                                if(isset($_url[2])){
-                            ?>
-                                <option value="<?=$gl['group_id']?>" <?php  echo $id == $gl['group_id'] ? "selected" : ""; ?> ><?=$gl['group_name']?></option>
-		                    <?php }else { ?>
-                                <option value="<?=$gl['group_id']?>"><?=$gl['group_name']?></option>
-                            <?php }; }; ?>
-                        </select>
-                    </div>
-                </div>
       				<table class="table table-hover nowrap" id="sayfalar" width="100%">
       					<thead>
       					<tr>
@@ -62,7 +47,6 @@
       						/*
       							---> examle securty id parse  |
       							------------------------------|
-      						    $id = "categori_".mbs_rand(4).$pl['categori_id']."-".mbs_rand(4);
       							$r =  explode("_",$id)[1];
       							$x = explode("-",$r)[0];
       							$run = substr($x,4);
@@ -80,7 +64,7 @@
       								<i class="fa fa-eye-slash"></i>
       							<?php }; ?>
       							</a>
-      							<a href="<?=panel_url()?>product-subcategori/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Alt Kategori Listesi">
+      							<a href="<?=panel_url()?>products/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Ürün Listesi">
       								<i class="fa fa-list"></i>
       							</a>
       							<a href="<?=panel_url()?>product/categori-edit/<?=$id?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">
@@ -111,7 +95,7 @@ $(document).ready(function(){
 	    ],
 		language: {
             lengthMenu 	: "",
-            zeroRecords : "<?php if(isset($_url[2])){ ?>Gruba Ait <?php }; ?> Kategori Bulunmamaktadır",
+            zeroRecords : "Kategori Bulunamadı",
             info		: "",
             infoEmpty	: "",
             infoFiltered: "",
@@ -123,24 +107,11 @@ $(document).ready(function(){
 			}
         },
 	});
-
-	$("#group_id").on("change",function () {
-        var ti = $(this).val();
-        if(ti == ""){
-            $id = "";
-        }else{
-            $id = "categori_<?=mbs_rand(4)?>" + ti + "-<?=mbs_rand(4)?>";
-        }
-        location.href = "<?=panel_url("product-categori/")?>"+$id;
-    })
-
-
-
 });
 </script>
-<?php if(isset( $_url[3] )){
-    echo $_url[3];
-    if($_url[3] == 'basarili'){
+<?php if(isset( $_url[2] )){
+    echo url(2);
+    if(url(2) == 'basarili'){
 ?>
     <script>
         $(document).ready(function () {

@@ -8,14 +8,10 @@ if(url(3)){
 	$arr = array(
 		'stats' => 1
 	);
-
-	$ts = $db->select("product_categori")->where("categori_id",$run)->run(true);
-	$id = "categori_".mbs_rand(4).$ts['group_id']."-".mbs_rand(4);
-
 	$delete = $db->delete("product_categori")->where("categori_id",$run)->done();
 	if( $delete ){
-		header("Location: ".panel_url("product-categori/".$id."/basarili"));
+		header("Location: ".panel_url("product-categori/basarili"));
 	}else{
-		header("Location: ".panel_url("product-categori/".$id."/hata"));
+		header("Location: ".panel_url("product-categori/hata"));
 	}
 }

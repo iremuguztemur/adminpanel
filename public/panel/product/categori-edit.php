@@ -1,7 +1,7 @@
 <section class="page-content">
-    <form action="<?=panel_url($_url[1]."/".$_url[2]."/".url(3))?>" method="post">
+    <form action="<?=panel_url(url(1)."/".url(2)."/".url(3))?>" method="post">
     <section class="page-content-inner">
-        <section class="panel panel-with-borders col-md-10">
+        <section class="panel panel-with-borders col-md-9">
             <div class="panel-heading">
                 <h3>Kategori Düzenle</h3>
             </div>
@@ -11,34 +11,21 @@
 					<div class="col-md-12">
 						<div class="row">
 							<div class="form-group">
-								<label for="">Grup :</label>
-                                <select name="group_id" class="form-control" id="group_id" required>
-                                    <option value="">Grup Seçiniz</option>
-									<?php foreach ($group_list as $gl){
-										if(isset($_url[2])){
-											?>
-                                            <option value="<?=$gl['group_id']?>" <?php  echo $edit['group_id'] == $gl['group_id'] ? "selected" : ""; ?> ><?=$gl['group_name']?></option>
-										<?php }else { ?>
-                                            <option value="<?=$gl['group_id']?>"><?=$gl['group_name']?></option>
-										<?php }; }; ?>
-                                </select>
-							</div>
-							<div class="form-group">
 								<label for="">Kategori Adı :</label>
-								<input type="text" name="categori_name" class="form-control" value="<?=$edit['categori_name']?>" required>
+								<input type="text" name="categori_name" class="form-control" value="<?=$sei['categori_name']?>" required>
 							</div>
 							<div class="form-group">
 								<label for="">Açıklama :</label>
-                                <textarea name="categori_description" class="form-control" rows="10"><?=$edit['categori_description']?></textarea>
+                  <textarea name="categori_description" class="form-control" rows="10"><?=$sei['categori_description']?></textarea>
 							</div>
-                            <input type="hidden" name="images" class="form-control">
+                  <input type="hidden" name="images" class="form-control">
 						</div>
 					</div>
 				</form>
             </div>
             </form>
         </section>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<section class="panel panel-with-borders ">
 				<div class="panel-heading" style="padding:10px">
 						<button type="submit" class="btn btn-primary" href="#add_image" style="padding:5px; font-size : 13px;">
@@ -68,14 +55,10 @@
     <form class="" id="imgUpload" action="<?=panel_url("image_upload.php")?>" method="post">
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-12 margin-bottom-15">
-                <input type="file" name="file[]" width="100%" id="files" multiple>
+          <div class="col-md-12">
+            { image upload plugin }
           </div>
         </div>
-        <div id="progress-wrp"><div class="progress-bar"></div ><div class="status">10%</div></div>
-        <div class="row margin-top-20" id="onizleme">
-        </div>
-      </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-default" data-dismiss="modal">Kapat</button>
         <button type="submit" class="btn btn-primary">Tamamla</button>
@@ -97,7 +80,7 @@ $(document).ready(function () {
         type: '<?=$cb["err"]["type"]?>'
     });
     setTimeout(function () {
-        location.href = '<?=panel_url("product-categori/"."categori_".mbs_rand(4).$edit['group_id']."-".mbs_rand(4))?>';
+        location.href = '<?=panel_url("product-categori")?>';
     },1500)
 })
 </script>

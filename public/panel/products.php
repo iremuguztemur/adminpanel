@@ -13,48 +13,24 @@
                         <label for="kategori">Ürün Kategorisi</label>
                           <select class="form-control" name="product_categori" id="product_categori">
                               <option value="#">Ürün Kategorisini Seçin</option>
-                              <?php foreach ($group_list as $pl){
-	                              $categori_list = $db->select("product_categori")->where("group_id",$pl['group_id'])->orderby("categori_id","ASC")->run();
-                              ?>
-                              <optgroup label="<?=$pl['group_name']?>">
-                                  <?php foreach ( $categori_list as $cl ){ ?>
-                                      <?php if( isset($c)){ ?>
-                                          <option value="<?=$cl['categori_id']?>" <?php echo $cat_id == $cl['categori_id'] ? "selected" : "";  ?>  ><?=$cl['categori_name']?></option>
-                                      <?php }else{ ?>
-                                          <option value="<?=$cl['categori_id']?>"  ><?=$cl['categori_name']?></option>
-
-                                      <?php } ?>
-                                  <?php }; ?>
-                              </optgroup>
+                              <?php foreach ($catList as $pl){ ?>
+                                          <option value="<?=$pl['categori_id']?>"  ><?=$pl['categori_name']?></option>
                                 <?php }; ?>
                           </select>
                       </div>
-	                  <?php if(isset($c) && ( $c == 'categori' || $c == 'subcategori' ) ){ ?>
-                      <div class="col-md-3">
-                        <label for="grup">Ürün Alt Kategori</label>
-                          <select class="form-control" name="product_subcategori" id="product_subcategori">
-                              <option value="#">Ürün Alt Kategori Seçin</option>
-                                <?php foreach ( $listAlt as $sc ){ ?>
-                                    <option value="<?=$sc['subcategori_id']?>"  <?php echo ($c == 'subcategori' && $sc['subcategori_id'] == $id ) ? "selected" : "" ; ?> ><?=$sc['subcategori_name']?></option>
-                                <?php }; ?>
-                          </select>
-                      </div>
-	                  <?php } ?>
                   </div>
               </div>
       				<table class="table table-hover nowrap" id="sayfalar" width="100%">
       					<thead>
       					<tr>
-      						<th>DMO Kodu</th>
-      						<th>Ürün Kodu</th>
-      						<th>Ürün Adı</th>
-      						<th>Durum</th>
-      						<th class="text-right">İşlem</th>
+      						<th style="min-width : 300px">Ürün Adı</th>
+      						<th>Açıklama</th>
+      						<th width="100">Durum</th>
+      						<th width="100" class="text-right">İşlem</th>
       					</tr>
       					</thead>
       					<tfoot>
       					<tr height="30">
-      						<th></th>
       						<th></th>
       						<th></th>
       						<th></th>
@@ -82,9 +58,8 @@
       						*/
       					?>
       					<tr>
-      						<td><?=$pl['dmo_code']?></td>
-      						<td><?=$pl['product_code']?></td>
       						<td><?=$pl['product_name']?></td>
+      						<td><?=$pl['product_description']?></td>
       						<td><?=$stat?></td>
       						<td class="text-right">
       							<a href="product/<?php if($stat != 0){ echo "active"; }else{ echo "passive"; }; ?>/<?=$idx?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($stat != 0){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
@@ -151,16 +126,6 @@ $(document).ready(function(){
     });
 
     /*--------------- */
-
-    $("#product_subcategori").on("change",function () {
-        var ti = $(this).val();
-        if(ti == ""){
-            $id = "";
-        }else{
-            $id = "subcategori_<?=mbs_rand(4)?>" + ti + "-<?=mbs_rand(4)?>";
-            location.href = "<?=panel_url("products/")?>"+$id;
-        }
-    });
 
 });
 </script>

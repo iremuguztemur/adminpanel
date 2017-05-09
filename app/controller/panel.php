@@ -23,17 +23,14 @@ $config['menu'] = [
     'title' => 'Ürünler',
     'icon' => 'icmn-store',
     'submenu' => [
-			'product-group' => [
-				'title' => 'Gruplar'
-			],
-      'product-categori' => [
-        'title' => 'Kategoriler'
+			'product-categori' => [
+				'title' => 'Ürün kategorisi'
 			],
       'products' => [
-        'title' => 'Ürünler'
+        'title' => 'Ürün listesi'
       ],
       'product/new-product' => [
-        'title' => 'Ürün Ekle'
+        'title' => 'Yeni Ekle'
       ]
     ]
   ],

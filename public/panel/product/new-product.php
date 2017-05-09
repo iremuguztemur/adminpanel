@@ -1,119 +1,56 @@
 <section class="page-content">
     <form action="<?=panel_url($_url[1]."/".$_url[2]."/".url(3))?>" method="post">
     <section class="page-content-inner">
-        <section class="panel panel-with-borders col-md-10">
+        <section class="panel panel-with-borders col-md-9">
             <div class="panel-heading">
                 <h3>Ürün Ekle</h3>
             </div>
             <form action="" method="post">
             <div class="panel-body">
-				<form name="sayfa_form" action="" method="post" id="form1">
-					<div class="col-md-6">
-						<div class="row">
-							<div class="form-group">
-                                <select name="group_id" class="form-control" id="groupid">
-                                    <option value="">Grup Seçiniz</option>
-                                    <?php foreach ($group_list as $gl) {?>
-                                        <option value="<?=$gl['group_id']?>"><?=$gl['group_name']?></option>
-                                    <?php }?>
-                                </select>
-							</div>
-                            <div class="form-group">
-                                <select name="categori_id" class="form-control" disabled="disabled" id="categori_id" required>
-                                    <option value="">Kategori Seçiniz</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="subcategori_id" class="form-control" disabled id="subcategori_id" required>
-                                    <option value="">Alt Kategori Seçiniz</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="product_name" class="form-control" placeholder="Ürün Adı" />
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" name="product_code" class="form-control" placeholder="Ürün Kodu">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="dmo_code" class="form-control" placeholder="DMO Kodu">
-                                </div>
-                            </div>
-                            <div class="row margin-top-15">
-                                <div class="col-md-6">
-                                    <input type="text" name="product_price" class="form-control" placeholder="Ürün Fiyatı">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" name="dmo_price" class="form-control" placeholder="DMO Fiyatı">
-                                </div>
-                            </div>
-                            <hr>
-                            <h4 style="color:#1d1d1d; font-weight: 400;">Etiketler</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <select class="select2-tags" name="tags[]" multiple>
-                                        <option value="Masa">Masa</option>
-                                        <option value="Dolap">Dolap</option>
-                                        <option value="Sandalye">Sandalye</option>
-                                    </select>
-                                    <small>* Etiketi listede bulamıyorsanız yazarak ekleyebilirsiniz.</small>
-                                </div>
-                            </div>
-						</div>
-					</div>
-                    <div class="col-md-6">
+        				<form name="sayfa_form" action="" method="post" id="form1">
+                      <div class="row">
                         <div class="form-group">
-                            <input type="text" name="item_title" class="form-control" placeholder="Ölçü Adı" />
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="item_width" class="form-control" placeholder="En" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="item_height" class="form-control" placeholder="Derinlik" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="item_size" class="form-control" placeholder="Boy" />
-                                </div>
-                            </div>
+                          <input type="text" name="product_name" class="form-control" value="" placeholder="Ürün Adı">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="second_item_title" class="form-control" placeholder="Ölçü Adı" />
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="second_item_width" class="form-control" placeholder="En" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="second_item_height" class="form-control" placeholder="Derinlik" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="text" name="second_item_size" class="form-control" placeholder="Boy" />
-                                </div>
-                            </div>
+                          <textarea name="product_description" class="form-control" rows="8" cols="80" placeholder="Açıklama"></textarea>
                         </div>
                         <div class="form-group">
-                            <textarea class="summernote" name="product_text" placeholder="İçerik"></textarea>
+                          <textarea name="product_text" class="summernote" rows="8" cols="80" placeholder="Açıklama"></textarea>
                         </div>
-                    </div>
-                    <div class="col-md-5">
-                    </div>
-				</form>
+                        <div class="form-group col-md-1">
+                          <div class="row">
+                            <div class="btn-group" style="width : 100%;" data-toggle="buttons">
+                                <label class="btn btn-default-outline link" style="border-radius: 0;">
+                                    <input type="checkbox" class="btn-link" name="link">
+                                    Link
+                                </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-11">
+                            <input type="text" style="min-height : 40px; box-shadow : none;" name="link_url" class="form-control input-link" disabled value="" placeholder="LINK URL">
+                        </div>
+                        <div class="form-group col-md-1">
+                          <div class="row">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default-outline link"  style="border-radius: 0;">
+                                    <input type="checkbox" name="video">
+                                    Video
+                                </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-11">
+                            <input type="text" style="min-height : 40px; box-shadow : none;" name="video_url" class="form-control disabled" disabled value="" placeholder="VIDEO URL">
+                        </div>
+                      </div>
+	                </form>
             </div>
             <input type="hidden" name="images" class="form-control">
             </form>
         </section>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<section class="panel panel-with-borders ">
 				<div class="panel-heading" style="padding:10px">
 						<button type="submit" class="btn btn-primary" href="#add_image" style="padding:5px; font-size : 13px;">
@@ -162,13 +99,27 @@
 $(document).ready(function () {
 
     $('.summernote').summernote({
-        height: 220
+        height: 220,
+        placeholder: ' Ürün İçeriği '
     });
-    $('.select2-tags').select2({
-        tags: true,
-        placeholder: "Etiket Seçiniz, veya yeni etiket yazınız.",
-        tokenSeparators: [',', ' ']
+
+    $(".link").on("click",function(){
+        if($(this).attr("class") != 'btn btn-default-outline link active'){
+          $(this).find("input").attr("checked","checked");
+          $(this).removeClass("active");
+          var inputName = $(this).find("input").attr("name");
+          $("input[name='"+ inputName +"_url']").removeAttr("disabled");
+        }else {
+          $(this).find("input").removeAttr("checked");
+          $(this).addClass("active");
+          var inputName = $(this).find("input").attr("name");
+            $("input[name='"+ inputName +"_url']").attr("disabled","disabled");
+        }
     });
+
+
+
+
 
     /* --------- */
 
@@ -242,10 +193,6 @@ $(document).ready(function () {
     setTimeout(function () {
         location.href = '<?=panel_url("product-subcategori/"."categori_".mbs_rand(4).$select_categori['categori_id']."-".mbs_rand(4))?>';
     },1500);
-
-
-
-
 
 })
 </script>

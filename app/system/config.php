@@ -1,11 +1,11 @@
 <?php
 /**
-	Delta Ajan Web Site System v:1.2
+	Delta Ajans Web Site System v:1.2
 	Create by : Delta Ajans
 	User : Taner Tombaş <taner@deltaajans.xyz> - <tombastaner@gmail.com>
 
 	{ SYSTEM PAGE [ GENERAL SETTINGS ] }
-		-> About database connection 
+		-> About database connection
 		-> First load language selected
 		-> Constant variables
 **/
@@ -16,11 +16,11 @@ $config['db'] = [
   'host' => 'localhost',
   'name' => 'deltaajans',
   'user' => 'root',
-  'pass' => ''
+  'pass' => 'root'
 ];
 
-/* 
-#database connect veriables example : ( $config['db']['host'] ) [ - SERVER - ] 
+/*
+#database connect veriables example : ( $config['db']['host'] ) [ - SERVER - ]
 $config['db'] = [
   'host' => 'localhost',
   'name' => 'samsunsegman',
