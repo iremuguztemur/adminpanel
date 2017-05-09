@@ -16,7 +16,7 @@ $config['db'] = [
   'host' => 'localhost',
   'name' => 'deltaajans',
   'user' => 'root',
-  'pass' => 'root'
+  'pass' => ''
 ];
 
 /*

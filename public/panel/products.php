@@ -14,8 +14,12 @@
                           <select class="form-control" name="product_categori" id="product_categori">
                               <option value="#">Ürün Kategorisini Seçin</option>
                               <?php foreach ($catList as $pl){ ?>
-                                          <option value="<?=$pl['categori_id']?>"  ><?=$pl['categori_name']?></option>
-                                <?php }; ?>
+                                    <?php if(isset($_url[2])){ ?>
+                                        <option value="<?=$pl['categori_id']?>" <?=$pl['categori_id'] == $id ? "selected" : "";?>  ><?=$pl['categori_name']?></option>
+                                    <?php }else { ?>
+                                        <option value="<?=$pl['categori_id']?>"><?=$pl['categori_name']?></option>
+                                    <?php }; ?>
+                              <?php }; ?>
                           </select>
                       </div>
                   </div>
@@ -62,17 +66,17 @@
       						<td><?=$pl['product_description']?></td>
       						<td><?=$stat?></td>
       						<td class="text-right">
-      							<a href="product/<?php if($stat != 0){ echo "active"; }else{ echo "passive"; }; ?>/<?=$idx?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($stat != 0){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
-      							<?php if($stat == 'aktif'){ ?>
+      							<a href="<?=panel_url("product")?>/<?php echo $pl['stats'] == 0 ? "product_active" : "product_passive"; ?>/<?=$idx?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($stat != 0){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
+      							<?php if($pl['stats'] == 0){ ?>
       								<i class="fa fa-eye"></i>
       							<?php }else { ?>
       								<i class="fa fa-eye-slash"></i>
       							<?php }; ?>
       							</a>
-      							<a href="product/edit/<?=$idx?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">
+      							<a href="<?=panel_url("product/edit/").$idx?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">
       								<i class="fa fa-pencil"></i>
       							</a>
-      							<a href="product/delete/<?=$idx?>" class="label label-danger" style="margin-left : 3px; padding:4px 8px;" title="Sil">
+      							<a href="<?=panel_url("product/product_delete/").$idx?>" class="label label-danger sil" style="margin-left : 3px; padding:4px 8px;" title="Sil">
       								<i class="fa fa-trash"></i>
       							</a>
       						</td>
@@ -126,7 +130,28 @@ $(document).ready(function(){
     });
 
     /*--------------- */
-
+    $(".sil").on("click",function(){
+      $link = $(this).attr("href");
+      swal({
+          title: "Ürün Silmek Üzresiniz",
+          text: "Bu ürünü silmek istediğinizden eminmisiniz ? ",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Evet, Sil",
+          cancelButtonText: "İptal",
+          closeOnConfirm: false,
+          closeOnCancel: false
+        },
+        function(isConfirm){
+          if (isConfirm) {
+            location.href= $link ;
+          } else {
+            swal("İptal Edildi", "Ürün Silme İptal Edildi", "error");
+          }
+        });
+        return false;
+    })
 });
 </script>
 <?php if(isset( $_url[3] )){
@@ -141,6 +166,9 @@ $(document).ready(function () {
     },{
         type: 'success'
     });
+    setTimeout(function(){
+      location.href = "<?=panel_url("products/").url(2)?>";
+    },1000);
 })
 </script>
 <?php }else{ ?>
@@ -152,6 +180,10 @@ $(document).ready(function () {
             },{
                 type: 'danger'
             });
+
+            setTimeout(function(){
+              location.href = "<?=panel_url("products/").url(2)?>";
+            },1000);
         })
     </script>
 <?php    }; }; ?>

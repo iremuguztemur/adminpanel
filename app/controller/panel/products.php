@@ -13,8 +13,12 @@ if( isset( $_url[2] ) ){
 	$c = explode("_",$getid)[0];
 	$x = explode("-",$r)[0];
 	$id = substr($x,4);
-
+if($id == ''){
+	$pagelist = $db->select("products")->run();
+}else{
 	$pagelist = $db->select("products")->where("categori_id",$id)->run();
+}
+
 	$subList = $db->select("product_categori")->where("categori_id",$id)->run(true);
   $cat_id = $subList['categori_id'];
 

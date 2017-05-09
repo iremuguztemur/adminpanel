@@ -5,11 +5,9 @@
 	User : Taner Tombaş <taner@deltaajans.xyz> - <tombastaner@gmail.com>
 
 	This page works :
-
 		-> filter the url [ get system ]
 		-> security control [ url sql inject control, form spam control ]
 		-> url parser !
-
 */
 /* todo::@php errors */
 error_reporting(E_ALL);

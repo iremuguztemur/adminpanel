@@ -10,6 +10,14 @@
         				<form name="sayfa_form" action="" method="post" id="form1">
                       <div class="row">
                         <div class="form-group">
+                          <select class="form-control" name="categori_id">
+                            <option value="0">Kategori Seçiniz..</option>
+                            <?php foreach ($group_list as $gl) { ?>
+                                <option value="<?=$gl['categori_id']?>"><?=$gl['categori_name']?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                        <div class="form-group">
                           <input type="text" name="product_name" class="form-control" value="" placeholder="Ürün Adı">
                         </div>
                         <div class="form-group">
@@ -22,7 +30,7 @@
                           <div class="row">
                             <div class="btn-group" style="width : 100%;" data-toggle="buttons">
                                 <label class="btn btn-default-outline link" style="border-radius: 0;">
-                                    <input type="checkbox" class="btn-link" name="link">
+                                    <input type="checkbox" class="btn-link" name="link" value="1">
                                     Link
                                 </label>
                             </div>
@@ -35,7 +43,7 @@
                           <div class="row">
                             <div class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-default-outline link"  style="border-radius: 0;">
-                                    <input type="checkbox" name="video">
+                                    <input type="checkbox" name="video" value="1">
                                     Video
                                 </label>
                             </div>
@@ -103,6 +111,7 @@ $(document).ready(function () {
         placeholder: ' Ürün İçeriği '
     });
 
+	/* click for button [ link | video ] */
     $(".link").on("click",function(){
         if($(this).attr("class") != 'btn btn-default-outline link active'){
           $(this).find("input").attr("checked","checked");
@@ -114,13 +123,8 @@ $(document).ready(function () {
           $(this).addClass("active");
           var inputName = $(this).find("input").attr("name");
             $("input[name='"+ inputName +"_url']").attr("disabled","disabled");
-        }
+        };
     });
-
-
-
-
-
     /* --------- */
 
     $("select#groupid").on("change",function(){
@@ -177,9 +181,7 @@ $(document).ready(function () {
     });
 })
 </script>
-<?php
-    if(isset($cb['err'])){
-?>
+<?php if(isset($cb['err'])){ ?>
 
 <script>
 $(document).ready(function () {
@@ -189,9 +191,8 @@ $(document).ready(function () {
     },{
         type: '<?=$cb["err"]["type"]?>'
     });
-
     setTimeout(function () {
-        location.href = '<?=panel_url("product-subcategori/"."categori_".mbs_rand(4).$select_categori['categori_id']."-".mbs_rand(4))?>';
+        location.href = '<?=panel_url("products/"."categori_".mbs_rand(4).$cb['err']['catID']."-".mbs_rand(4))?>';
     },1500);
 
 })

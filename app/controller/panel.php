@@ -7,15 +7,18 @@ if(!url(1)){
 
 
 $config['menu'] = [
-  'pages' => [
+	'pages' => [
     'title' => 'Sayfalar',
-    'icon' => 'icmn-files-empty2',
+    'icon' => 'icmn-file-plus',
     'submenu' => [
+			'page-categori' => [
+				'title' => 'Sayfa kategorisi'
+			],
       'pages' => [
-        'title' => 'Sayfalar'
+        'title' => 'Sayfa listesi'
       ],
-      'new-page' => [
-        'title' => 'Sayfa Ekle'
+      'pages/new-page' => [
+        'title' => 'Yeni Ekle'
       ]
     ]
   ],
