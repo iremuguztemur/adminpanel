@@ -2,7 +2,7 @@
     <section class="page-content-inner">
         <section class="panel panel-with-borders">
             <div class="panel-heading">
-                <h3>Ürün Kategorileri <a href="<?=panel_url('product/new-categori')?>" class="btn btn-success pull-right padding-5"><i class="fa fa-plus margin-right-10"></i>Yeni Kategori Ekle</a></h3>
+                <h3>Sayfa Kategorileri <a href="<?=panel_url('pages/new-categori')?>" class="btn btn-success pull-right padding-5"><i class="fa fa-plus margin-right-10"></i>Yeni Kategori Ekle</a></h3>
             </div>
             <div class="panel-body">
       				<table class="table table-hover nowrap" id="sayfalar" width="100%">
@@ -57,20 +57,20 @@
       						<td><?=$pl['categori_name']?></td>
       						<td><?=$stat?></td>
       						<td class="text-right">
-      							<a href="<?=panel_url()?>product/<?php if($pl['stats'] != '1'){ echo "categori_active"; }else{ echo "categori_passive"; }; ?>/<?=$id?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($pl['stats'] != '1'){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
+      							<a href="<?=panel_url()?>pages/<?php if($pl['stats'] != '1'){ echo "categori_active"; }else{ echo "categori_passive"; }; ?>/<?=$id?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($pl['stats'] != '1'){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
       							<?php if($pl['stats'] != '1'){ ?>
       								<i class="fa fa-eye"></i>
       							<?php }else { ?>
       								<i class="fa fa-eye-slash"></i>
       							<?php }; ?>
       							</a>
-      							<a href="<?=panel_url()?>products/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Ürün Listesi">
+      							<a href="<?=panel_url()?>page/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Ürün Listesi">
       								<i class="fa fa-list"></i>
       							</a>
-      							<a href="<?=panel_url()?>product/categori-edit/<?=$id?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">
+      							<a href="<?=panel_url()?>pages/categori-edit/<?=$id?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">
       								<i class="fa fa-pencil"></i>
       							</a>
-      							<a href="<?=panel_url("product/categori_delete/")?><?=$id?>" class="label label-danger sil" style="margin-left : 3px; padding:4px 8px;" title="Sil">
+      							<a href="<?=panel_url("pages/categori_delete/")?><?=$id?>" class="label label-danger sil" style="margin-left : 3px; padding:4px 8px;" title="Sil">
       								<i class="fa fa-trash"></i>
       							</a>
       						</td>

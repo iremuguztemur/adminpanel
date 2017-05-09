@@ -8,10 +8,10 @@ if(url(3)){
 	$arr = array(
 		'stats' => 1
 	);
-	$update = $db->update("product_categori")->where("categori_id",$run)->set($arr);
+	$update = $db->update("page_categori")->where("categori_id",$run)->set($arr);
 	if( $update ){
-		header("Location: ".panel_url("product-categori/basarili"));
+		header("Location: ".panel_url("page-categori/basarili"));
 	}else{
-		header("Location: ".panel_url("product-group/hata"));
+		header("Location: ".panel_url("page-group/hata"));
 	}
 }

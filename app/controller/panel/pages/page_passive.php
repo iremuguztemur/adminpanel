@@ -9,13 +9,13 @@ if(url(3)){
 		'stats' => 0
 	);
 
-		$sl = $db->select("products")->where("product_id",$run)->run(true);
+		$sl = $db->select("page")->where("page_id",$run)->run(true);
 		$catid = "categori_".mbs_rand(4).$sl['categori_id']."-".mbs_rand(4);
 
-		$update = $db->update("products")->where("product_id",$run)->set($arr);
+		$update = $db->update("page")->where("page_id",$run)->set($arr);
 		if( $update ){
-			header("Location: ".panel_url("products/".$catid."/basarili"));
+			header("Location: ".panel_url("page/".$catid."/basarili"));
 		}else{
-			header("Location: ".panel_url("products/".$catid."/hata"));
+			header("Location: ".panel_url("page/".$catid."/hata"));
 		}
 }

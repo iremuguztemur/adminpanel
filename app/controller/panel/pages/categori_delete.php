@@ -8,10 +8,10 @@ if(url(3)){
 	$arr = array(
 		'stats' => 1
 	);
-	$delete = $db->delete("product_categori")->where("categori_id",$run)->done();
+	$delete = $db->delete("page_categori")->where("categori_id",$run)->done();
 	if( $delete ){
-		header("Location: ".panel_url("product-categori/basarili"));
+		header("Location: ".panel_url("page-categori/basarili"));
 	}else{
-		header("Location: ".panel_url("product-categori/hata"));
+		header("Location: ".panel_url("page-categori/hata"));
 	}
 }

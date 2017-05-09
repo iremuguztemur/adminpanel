@@ -13,9 +13,9 @@ if(url(3)) {
 	$x = explode("-", $r)[0];
 	$run = substr($x, 4);
 	$arr = array();
-	$sei =  $db->select("product_categori")->where("categori_id", $run)->run(true);
+	$sei =  $db->select("page_categori")->where("categori_id", $run)->run(true);
 	if(!isset($sei)){
-		header("Location:".panel_url("product-categori"));
+		header("Location:".panel_url("page-categori"));
 	}
 }
 
@@ -31,7 +31,7 @@ if( $_POST ){
 	$v['stats'] = $sei['stats'];
 	$v['categori_sira'] = $sei['categori_sira'];
 	if($v['categori_name'] != ''){
-		$update = $db->update("product_categori")->where("categori_id",$run)->set($v);
+		$update = $db->update("page_categori")->where("categori_id",$run)->set($v);
 
 		if( $update ){
 			$cb['err']['title'] = "Başarılı.";

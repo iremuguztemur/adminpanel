@@ -5,7 +5,7 @@ if(!file_exists(panel_view($_url[1]."/".$_url[2]))){
 }else{
 	$page = $_url[1]."/".$_url[2];
 }
-$group_list =  $db->select("product_categori")->orderby("categori_id", "ASC")->run();
+$group_list =  $db->select("page_categori")->orderby("categori_id", "ASC")->run();
 
 if(isset($_url[3])){
 	$id = url(3);
@@ -13,10 +13,10 @@ if(isset($_url[3])){
 	$x = explode("-", $r)[0];
 	$run = substr($x, 4);
 
-	$edit =  $db->select("products")->where("product_id", $run)->run(true);
+	$edit =  $db->select("page")->where("page_id", $run)->run(true);
 	$fixImage = $db->select("img_library")->where("gallery_id", $run)->run(true);
 	$Images = $db->select("img_library")->where("gallery_id", $run)->run();
-	$ximgid = $edit['product_id'];
+	$ximgid = $edit['page_id'];
 
 }
 
@@ -24,26 +24,26 @@ if( $_POST ){
 
 	$vbx = array();
 		$vbx['categori_id'] = htmlspecialchars(post('categori_id'));
-		$vbx['product_name'] = htmlspecialchars(post('product_name'));
-		$vbx['product_self'] = permalink(post('product_name'));
-		$vbx['product_description'] = htmlspecialchars(post('product_description'));
-		$vbx['product_text'] = htmlspecialchars(post('product_text'));
-		$vbx['product_image'] = htmlspecialchars(trim(post('images')));
-		$vbx['product_link_url'] = htmlspecialchars(post("link_url"));
-		$vbx['product_video_url'] = htmlspecialchars(post("video_url"));
+		$vbx['page_name'] = htmlspecialchars(post('page_name'));
+		$vbx['page_self'] = permalink(post('page_name'));
+		$vbx['page_description'] = htmlspecialchars(post('page_description'));
+		$vbx['page_text'] = htmlspecialchars(post('page_text'));
+		$vbx['page_image'] = htmlspecialchars(trim(post('images')));
+		$vbx['page_link_url'] = htmlspecialchars(post("link_url"));
+		$vbx['page_video_url'] = htmlspecialchars(post("video_url"));
 		$vbx['stats'] = 1;
 		# link active passive
 		if(post("link") == 1)
-			$vbx['product_link'] = 1;
+			$vbx['page_link'] = 1;
 		else
-			$vbx['product_link'] = 0;
+			$vbx['page_link'] = 0;
 		#video active passive
 		if(post("video") == 1)
-			$vbx['product_video'] = 1;
+			$vbx['page_video'] = 1;
 		else
-			$vbx['product_video'] = 0;
+			$vbx['page_video'] = 0;
 
-		$update = $db->update("products")->where("product_id",$run)->set($vbx);
+		$update = $db->update("page")->where("page_id",$run)->set($vbx);
 		if( $update ){
 			$cb['err']['title'] = "Başarılı : ";
 			$cb['err']['message'] = "Kategori başarılı bir şekilde güncellenmiştir.";

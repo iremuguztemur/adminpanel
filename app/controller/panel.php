@@ -14,7 +14,7 @@ $config['menu'] = [
 			'page-categori' => [
 				'title' => 'Sayfa kategorisi'
 			],
-      'pages' => [
+      'page' => [
         'title' => 'Sayfa listesi'
       ],
       'pages/new-page' => [

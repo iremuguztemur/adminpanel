@@ -8,7 +8,7 @@ if(!file_exists( panel_view( url(1)."/".url(2) ) )){
 if( $_POST ){
 	$cb = array();
 	$sira = 0;
-	$number =  $db->select("product_categori")->orderby("categori_id", "DESC")->run(true);
+	$number =  $db->select("page_categori")->orderby("categori_id", "DESC")->run(true);
 
 	if( $number )
 		$sira = $number['categori_sira'];
@@ -23,7 +23,7 @@ if( $_POST ){
 		$v['categori_sira'] = $sira;
 
 		if($v['categori_name'] != ''){
-			$insert = $db->insert("product_categori") ->set($v);
+			$insert = $db->insert("page_categori")->set($v);
 
 			if( $insert ){
 				$cb['err']['title'] = "Başarılı.";

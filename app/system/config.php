@@ -1,5 +1,5 @@
 <?php
-/**
+/*
 	Delta Ajans Web Site System v:1.2
 	Create by : Delta Ajans
 	User : Taner Tombaş <taner@deltaajans.xyz> - <tombastaner@gmail.com>
@@ -8,7 +8,7 @@
 		-> About database connection
 		-> First load language selected
 		-> Constant variables
-**/
+*/
 $config = array();
 
 #database connect veriables example : ( $config['db']['host'] ) [ - LOCALhOST - ]
@@ -16,7 +16,7 @@ $config['db'] = [
   'host' => 'localhost',
   'name' => 'deltaajans',
   'user' => 'root',
-  'pass' => ''
+  'pass' => 'root'
 ];
 
 /*
