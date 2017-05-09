@@ -1,0 +1,221 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: 127.0.0.1 (MySQL 5.5.5-10.1.23-MariaDB)
+# Database: deltaajans
+# Generation Time: 2017-05-09 07:00:23 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table general_setting
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `general_setting`;
+
+CREATE TABLE `general_setting` (
+  `ayarid` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `slogan` text COLLATE utf8_turkish_ci NOT NULL,
+  `keywords` text COLLATE utf8_turkish_ci NOT NULL,
+  `aciklama` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `copyright` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `robots` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `revisit` int(11) NOT NULL,
+  `domain` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `analytic` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `mailserver` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `mailadres` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `mailsifre` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `telefon` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `faks` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `eposta` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `adres` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `harita` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `lisans_kodu` text COLLATE utf8_turkish_ci NOT NULL,
+  `aktif` int(11) NOT NULL DEFAULT '1',
+  `bakim` int(11) NOT NULL DEFAULT '0',
+  `facebook` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `twitter` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `instagram` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `youtube` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `pinterest` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  PRIMARY KEY (`ayarid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+LOCK TABLES `general_setting` WRITE;
+/*!40000 ALTER TABLE `general_setting` DISABLE KEYS */;
+
+INSERT INTO `general_setting` (`ayarid`, `title`, `slogan`, `keywords`, `aciklama`, `copyright`, `robots`, `revisit`, `domain`, `analytic`, `mailserver`, `mailadres`, `mailsifre`, `telefon`, `faks`, `eposta`, `adres`, `harita`, `lisans_kodu`, `aktif`, `bakim`, `facebook`, `twitter`, `instagram`, `youtube`, `pinterest`)
+VALUES
+	(1,'Delta Ajans','Tasarım Stüdyosu','delta, delta bilişim, delta bilisim, delta, bilişim, bilisim, samsun bilisim, samsun bilgisayar, samsun tasarım, tasarım stüdyosu, web sitesi, samsun web sitesi, samsun copter, samsun hexacopter, hexacopter, samsun helikopter, hosting, domain, 3d modelleme, havadan görüntüleme samsun, fotoğraf çekimi, interaktif medya, basılı medya, profesyonel çözümler, türkiye bilişim, türkiye web tasarım, web tasarım, reklam ajansı','','All right reserved','all',7,'www.deltaajans.xyz','','mail.deltaajans.xyz','bilgi@deltaajans.xyz','123456','','','','','','',1,0,'','','','','');
+
+/*!40000 ALTER TABLE `general_setting` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table img_library
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `img_library`;
+
+CREATE TABLE `img_library` (
+  `img_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gallery_id` int(11) NOT NULL,
+  `image_name` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `add_date` date NOT NULL,
+  PRIMARY KEY (`img_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table pages
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `pages`;
+
+CREATE TABLE `pages` (
+  `page_id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_name` varchar(255) NOT NULL,
+  `page_description` text NOT NULL,
+  `page_text` longtext NOT NULL,
+  `add_date` date NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `stats` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`page_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `pages` WRITE;
+/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+
+INSERT INTO `pages` (`page_id`, `page_name`, `page_description`, `page_text`, `add_date`, `image`, `stats`)
+VALUES
+	(1,'Kurumsal','Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. ','Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. Lorem Ipsum kullanmanın amacı, sürekli \'buraya metin gelecek, buraya metin gelecek\' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda birçok masaüstü yayıncılık paketi ve web sayfa düzenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında \'lorem ipsum\' anahtar sözcükleri ile arama yapıldığında henüz tasarım aşamasında olan çok sayıda site listelenir. Yıllar içinde, bazen kazara, bazen bilinçli olarak (örneğin mizah katılarak), çeşitli sürümleri geliştirilmiştir.','2017-04-28','',2);
+
+/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table product_categori
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `product_categori`;
+
+CREATE TABLE `product_categori` (
+  `categori_id` int(11) NOT NULL AUTO_INCREMENT,
+  `categori_name` varchar(255) NOT NULL,
+  `categori_self` varchar(255) NOT NULL DEFAULT '',
+  `categori_description` text NOT NULL,
+  `categori_image` varchar(150) NOT NULL,
+  `stats` int(11) NOT NULL DEFAULT '0',
+  `categori_sira` int(11) NOT NULL,
+  PRIMARY KEY (`categori_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `product_categori` WRITE;
+/*!40000 ALTER TABLE `product_categori` DISABLE KEYS */;
+
+INSERT INTO `product_categori` (`categori_id`, `categori_name`, `categori_self`, `categori_description`, `categori_image`, `stats`, `categori_sira`)
+VALUES
+	(2,'Ürün Kategorisi','urun-kategorisi','Kategori Açıklaması','',1,0);
+
+/*!40000 ALTER TABLE `product_categori` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table products
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `products`;
+
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `categori_id` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `product_name` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT '',
+  `product_self` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
+  `product_description` text COLLATE utf8_turkish_ci NOT NULL,
+  `product_text` longtext COLLATE utf8_turkish_ci NOT NULL,
+  `product_image` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT '',
+  `product_link` int(11) NOT NULL DEFAULT '0',
+  `product_link_url` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT '',
+  `product_video` int(255) NOT NULL DEFAULT '0',
+  `product_video_url` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT '',
+  `stats` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+
+INSERT INTO `products` (`product_id`, `categori_id`, `product_name`, `product_self`, `product_description`, `product_text`, `product_image`, `product_link`, `product_link_url`, `product_video`, `product_video_url`, `stats`)
+VALUES
+	(1,'2','test urun','test-urun','text aciklama','text içerik yazısı','1',1,'link url',0,'',0);
+
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table sub_pages
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sub_pages`;
+
+CREATE TABLE `sub_pages` (
+  `subpage_id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_id` int(11) NOT NULL,
+  `page_name` int(11) NOT NULL,
+  `page_descripton` text NOT NULL,
+  `page_text` longtext NOT NULL,
+  `add_date` date NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `stats` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`subpage_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `rank` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`user_id`, `username`, `password`, `rank`)
+VALUES
+	(1,'admin','e10adc3949ba59abbe56e057f20f883e',1),
+	(2,'demo_admin','fe01ce2a7fbac8fafaed7c982a04e229',2);
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
