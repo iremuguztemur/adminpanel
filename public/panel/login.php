@@ -5,9 +5,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="logo">
-                    <a href="javascript: history.back();">
-                        <img src="<?=asset_url('images/logo.png')?>" alt="Delta Ajans Yönetim Paneli" />
-                    </a>
+                    <a href="javascript: history.back();"> </a>
                 </div>
             </div>
         </div>
@@ -27,7 +25,7 @@
                         <?php endif; ?>
                         <h3 class="text-center">
                             Yönetim Paneli
-                            <span class="small">Delta Ajans</span>
+                            <span class="small">Hoşgeldiniz..</span>
                         </h3>
                         
                         <br />

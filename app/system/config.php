@@ -14,9 +14,9 @@ $config = array();
 #database connect veriables example : ( $config['db']['host'] ) [ - LOCALhOST - ]
 $config['db'] = [
   'host' => 'localhost',
-  'name' => 'deltaajans',
+  'name' => 'missdb',
   'user' => 'root',
-  'pass' => 'root'
+  'pass' => ''
 ];
 
 /*
@@ -39,7 +39,7 @@ define('_public', _base.'/public');  //@todo:: [ _base/public ]
 define('_inc', _base.'/public/include');  //@todo:: [ _base/public/include ] ( file catch )
 
 # static veriable's [ browser url ]
-define('_siteurl', "http://".$_SERVER['SERVER_NAME']."/".explode("/",$_SERVER['SCRIPT_NAME'])[1]); #[ page browser url / folder name catch ]
+define('_siteurl', "http://".$_SERVER['SERVER_NAME']); #[ page browser url / folder name catch ] ."/".explode("/",$_SERVER['SCRIPT_NAME'])[1]
 define('_upload', _siteurl."/upload/");
 define('_updocs', _siteurl."/upload/docs/");
 define('_ajax', _siteurl."/ajax/");

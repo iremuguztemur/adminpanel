@@ -6,9 +6,9 @@ if(url(3)){
 	$x = explode("-",$r)[0];
 	$run = substr($x,4);
 	$arr = array(
-		'stats' => 1
+		'isActive' => 1
 	);
-	$update = $db->update("page_categori")->where("categori_id",$run)->set($arr);
+	$update = $db->update("page_categories")->where("id",$run)->set($arr);
 	if( $update ){
 		header("Location: ".panel_url("page-categori/basarili"));
 	}else{

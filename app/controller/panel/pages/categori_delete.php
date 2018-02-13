@@ -6,9 +6,9 @@ if(url(3)){
 	$x = explode("-",$r)[0];
 	$run = substr($x,4);
 	$arr = array(
-		'stats' => 1
+		'isActive' => 1
 	);
-	$delete = $db->delete("page_categori")->where("categori_id",$run)->done();
+	$delete = $db->delete("page_categories")->where("id",$run)->done();
 	if( $delete ){
 		header("Location: ".panel_url("page-categori/basarili"));
 	}else{

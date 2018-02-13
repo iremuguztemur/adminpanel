@@ -12,13 +12,17 @@
 						<div class="row">
 							<div class="form-group">
 								<label for="">Kategori Adı :</label>
-								<input type="text" name="categori_name" class="form-control" value="<?=$sei['categori_name']?>" required>
+								<input type="text" name="title" class="form-control" value="<?=$sei['title']?>" required>
 							</div>
 							<div class="form-group">
 								<label for="">Açıklama :</label>
-                  <textarea name="categori_description" class="form-control" rows="10"><?=$sei['categori_description']?></textarea>
+                  <textarea name="description" class="form-control" rows="10"><?=$sei['description']?></textarea>
 							</div>
-                  <input type="hidden" name="images" class="form-control">
+							<div class="form-group">
+								<label for="">Detay :</label>
+                  <textarea name="body" class="form-control" rows="10"><?=$sei['body']?></textarea>
+							</div>
+                            <input type="hidden" name="images" class="form-control">
 						</div>
 					</div>
 				</form>
@@ -56,7 +60,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-            { image upload plugin }
+
           </div>
         </div>
       <div class="modal-footer">

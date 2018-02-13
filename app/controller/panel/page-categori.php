@@ -6,7 +6,7 @@ if(!file_exists(panel_view($_url[1]))){
 	$page = $_url[1];
 }
 # page List Call
-$pagelist = $db->select("page_categori")->run();
+$pagelist = $db->select("page_categories")->run();
 
 # call header
 require panel_statics("header");

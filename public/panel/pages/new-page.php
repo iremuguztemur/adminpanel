@@ -13,7 +13,7 @@
                           <select class="form-control" name="categori_id">
                             <option value="0">Kategori Seçiniz..</option>
                             <?php foreach ($group_list as $gl) { ?>
-                                <option value="<?=$gl['categori_id']?>"><?=$gl['categori_name']?></option>
+                                <option value="<?=$gl['id']?>"><?=$gl['title']?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -72,8 +72,8 @@
 					<div class="row">
 						<ul class="list-group">
 							<a class="list-group-item" href="#add_image"  data-toggle="modal" data-target="#myModal"><i class="fa fa-picture-o margin-right-10"></i>Fotoğraf Ekle</a>
-							<a class="list-group-item" href="#add_gallery"><i class="fa fa-book margin-right-10"></i>Galeri Ekle</a>
-							<a class="list-group-item" href="#add_documents"><i class="fa fa-paperclip margin-right-10"></i>Dosya Ekle</a>
+<!--							<a class="list-group-item" href="#add_gallery"><i class="fa fa-book margin-right-10"></i>Galeri Ekle</a>-->
+<!--							<a class="list-group-item" href="#add_documents"><i class="fa fa-paperclip margin-right-10"></i>Dosya Ekle</a>-->
 						</ul>
 					</div>
 				</div>

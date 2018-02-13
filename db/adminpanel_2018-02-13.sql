@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.5.5-10.1.23-MariaDB)
-# Database: deltaajans
-# Generation Time: 2017-05-09 07:00:23 +0000
+# Host: 127.0.0.1 (MySQL 5.5.5-10.2.12-MariaDB)
+# Database: missdb
+# Generation Time: 2018-02-13 15:51:41 +0000
 # ************************************************************
 
 
@@ -45,8 +45,8 @@ CREATE TABLE `general_setting` (
   `adres` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `harita` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `lisans_kodu` text COLLATE utf8_turkish_ci NOT NULL,
-  `aktif` int(11) NOT NULL DEFAULT '1',
-  `bakim` int(11) NOT NULL DEFAULT '0',
+  `aktif` int(11) NOT NULL DEFAULT 1,
+  `bakim` int(11) NOT NULL DEFAULT 0,
   `facebook` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `twitter` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
   `instagram` varchar(255) COLLATE utf8_turkish_ci NOT NULL,
@@ -60,7 +60,7 @@ LOCK TABLES `general_setting` WRITE;
 
 INSERT INTO `general_setting` (`ayarid`, `title`, `slogan`, `keywords`, `aciklama`, `copyright`, `robots`, `revisit`, `domain`, `analytic`, `mailserver`, `mailadres`, `mailsifre`, `telefon`, `faks`, `eposta`, `adres`, `harita`, `lisans_kodu`, `aktif`, `bakim`, `facebook`, `twitter`, `instagram`, `youtube`, `pinterest`)
 VALUES
-	(1,'Delta Ajans','Tasarım Stüdyosu','delta, delta bilişim, delta bilisim, delta, bilişim, bilisim, samsun bilisim, samsun bilgisayar, samsun tasarım, tasarım stüdyosu, web sitesi, samsun web sitesi, samsun copter, samsun hexacopter, hexacopter, samsun helikopter, hosting, domain, 3d modelleme, havadan görüntüleme samsun, fotoğraf çekimi, interaktif medya, basılı medya, profesyonel çözümler, türkiye bilişim, türkiye web tasarım, web tasarım, reklam ajansı','','All right reserved','all',7,'www.deltaajans.xyz','','mail.deltaajans.xyz','bilgi@deltaajans.xyz','123456','','','','','','',1,0,'','','','','');
+	(1,'Taner Tombas','a coder','','','All right reserved','all',7,'www.tanertombas.com','','mail.tanertombas.com','taner@tanertombas.com','123456','','','','','','',1,0,'','','','','');
 
 /*!40000 ALTER TABLE `general_setting` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -73,6 +73,7 @@ DROP TABLE IF EXISTS `img_library`;
 
 CREATE TABLE `img_library` (
   `img_id` int(11) NOT NULL AUTO_INCREMENT,
+  `module` varchar(191) DEFAULT NULL,
   `gallery_id` int(11) NOT NULL,
   `image_name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
@@ -82,28 +83,62 @@ CREATE TABLE `img_library` (
 
 
 
+# Dump of table page_categories
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `page_categories`;
+
+CREATE TABLE `page_categories` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(191) DEFAULT NULL,
+  `slug` varchar(191) DEFAULT NULL,
+  `description` varchar(191) DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `image` varchar(191) DEFAULT NULL,
+  `isActive` varchar(3) DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `page_categories` WRITE;
+/*!40000 ALTER TABLE `page_categories` DISABLE KEYS */;
+
+INSERT INTO `page_categories` (`id`, `title`, `slug`, `description`, `body`, `image`, `isActive`, `number`)
+VALUES
+	(1,'Ana Sayfa','ana-sayfa','','','','1',0);
+
+/*!40000 ALTER TABLE `page_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table pages
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `pages`;
 
 CREATE TABLE `pages` (
-  `page_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categories` int(11) DEFAULT NULL,
   `page_name` varchar(255) NOT NULL,
+  `page_self` varchar(191) DEFAULT NULL,
   `page_description` text NOT NULL,
   `page_text` longtext NOT NULL,
-  `add_date` date NOT NULL,
+  `add_date` datetime NOT NULL,
   `image` varchar(255) NOT NULL,
-  `stats` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`page_id`)
+  `stats` int(11) NOT NULL DEFAULT 0,
+  `page_link_url` varchar(191) DEFAULT NULL,
+  `page_video_url` varchar(191) DEFAULT NULL,
+  `page_link` int(11) DEFAULT NULL,
+  `page_video` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 LOCK TABLES `pages` WRITE;
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
 
-INSERT INTO `pages` (`page_id`, `page_name`, `page_description`, `page_text`, `add_date`, `image`, `stats`)
+INSERT INTO `pages` (`id`, `categories`, `page_name`, `page_self`, `page_description`, `page_text`, `add_date`, `image`, `stats`, `page_link_url`, `page_video_url`, `page_link`, `page_video`)
 VALUES
-	(1,'Kurumsal','Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. ','Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. Lorem Ipsum kullanmanın amacı, sürekli \'buraya metin gelecek, buraya metin gelecek\' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda birçok masaüstü yayıncılık paketi ve web sayfa düzenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında \'lorem ipsum\' anahtar sözcükleri ile arama yapıldığında henüz tasarım aşamasında olan çok sayıda site listelenir. Yıllar içinde, bazen kazara, bazen bilinçli olarak (örneğin mizah katılarak), çeşitli sürümleri geliştirilmiştir.','2017-04-28','',2);
+	(1,1,'Kurumsal','kurumsal','Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir.','Yinelenen bir sayfa içeriğinin okuyucunun dikkatini dağıttığı bilinen bir gerçektir. Lorem Ipsum kullanmanın amacı, sürekli \'buraya metin gelecek, buraya metin gelecek\' yazmaya kıyasla daha dengeli bir harf dağılımı sağlayarak okunurluğu artırmasıdır. Şu anda birçok masaüstü yayıncılık paketi ve web sayfa düzenleyicisi, varsayılan mıgır metinler olarak Lorem Ipsum kullanmaktadır. Ayrıca arama motorlarında \'lorem ipsum\' anahtar sözcükleri ile arama yapıldığında henüz tasarım aşamasında olan çok sayıda site listelenir. Yıllar içinde, bazen kazara, bazen bilinçli olarak (örneğin mizah katılarak), çeşitli sürümleri geliştirilmiştir','2018-02-13 14:37:20','',1,'','',0,0);
 
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -120,7 +155,7 @@ CREATE TABLE `product_categori` (
   `categori_self` varchar(255) NOT NULL DEFAULT '',
   `categori_description` text NOT NULL,
   `categori_image` varchar(150) NOT NULL,
-  `stats` int(11) NOT NULL DEFAULT '0',
+  `stats` int(11) NOT NULL DEFAULT 0,
   `categori_sira` int(11) NOT NULL,
   PRIMARY KEY (`categori_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -149,11 +184,11 @@ CREATE TABLE `products` (
   `product_description` text COLLATE utf8_turkish_ci NOT NULL,
   `product_text` longtext COLLATE utf8_turkish_ci NOT NULL,
   `product_image` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT '',
-  `product_link` int(11) NOT NULL DEFAULT '0',
+  `product_link` int(11) NOT NULL DEFAULT 0,
   `product_link_url` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT '',
-  `product_video` int(255) NOT NULL DEFAULT '0',
+  `product_video` int(255) NOT NULL DEFAULT 0,
   `product_video_url` varchar(255) COLLATE utf8_turkish_ci NOT NULL DEFAULT '',
-  `stats` int(11) NOT NULL DEFAULT '1',
+  `stats` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
@@ -181,7 +216,7 @@ CREATE TABLE `sub_pages` (
   `page_text` longtext NOT NULL,
   `add_date` date NOT NULL,
   `image` varchar(255) NOT NULL,
-  `stats` int(11) NOT NULL DEFAULT '0',
+  `stats` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`subpage_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

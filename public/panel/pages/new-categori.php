@@ -7,33 +7,37 @@
             </div>
             <form action="" method="post">
             <div class="panel-body">
-        				<form name="sayfa_form" action="" method="post" id="form1">
-        					<div class="col-md-12">
-        						<div class="row">
-        							<div class="form-group">
-        								<label for="">Kategori Adı :</label>
-        								<input type="text" name="categori_name" class="form-control" required>
-        							</div>
-        							<div class="form-group">
-        								<label for="">Açıklama :</label>
-                        <textarea name="categori_description" class="form-control" rows="10"></textarea>
-        							</div>
-                        <input type="hidden" name="images" class="form-control">
-        						</div>
-        					</div>
-        				</form>
+                <form name="sayfa_form" action="" method="post" id="form1">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="">Kategori Adı :</label>
+                                <input type="text" name="title" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Açıkalama :</label>
+                                <textarea name="description" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Detay :</label>
+                <textarea name="body" class="form-control" rows="14"></textarea>
+                            </div>
+                            <input type="hidden" name="images" class="form-control">
+                        </div>
+                    </div>
+                </form>
             </div>
             </form>
         </section>
 		<div class="col-md-3">
 			<section class="panel panel-with-borders ">
 				<div class="panel-heading" style="padding:10px">
-						<button type="submit" class="btn btn-primary" href="#add_image" style="padding:5px; font-size : 13px;">
-							Yayımla
-						</button>
-						<button class="btn btn-warning pull-right" href="#add_image" style="padding:5px; font-size : 13px;">
-							Taslak Olarak Kaydet
-						</button>
+                    <button type="submit" class="btn btn-primary" style="padding:5px; font-size : 13px;">
+                        Yayımla
+                    </button>
+                    <button class="btn btn-warning pull-right" style="padding:5px; font-size : 13px;">
+                        Taslak Olarak Kaydet
+                    </button>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -79,9 +83,12 @@ $(document).ready(function () {
     },{
         type: '<?=$cb["err"]["type"]?>'
     });
-    setTimeout(function () {
-        location.href = '<?=panel_url("page-categori")?>';
-    },1500)
+    $type = <?=$cb["err"]["type"]?>;
+    if ( $type == "success" ) {
+        setTimeout(function () {
+            location.href = '<?=panel_url("page-categori")?>';
+        },1500);
+    }
 })
 </script>
 

@@ -1,8 +1,17 @@
 <nav class="left-menu" left-menu>
     <div class="logo-container">
         <a href="<?=panel_url()?>" class="logo">
-            <img src="<?=asset_url('images/logo.png')?>" alt="Clean UI Admin Template" />
-            <img class="logo-inverse" src="<?=asset_url('images/logo.png')?>" alt="Clean UI Admin Template" />
+<!--            <img src="--><?//=asset_url('images/logo.png')?><!--" alt="Clean UI Admin Template" />-->
+<!--            <img class="logo-inverse" src="--><?//=asset_url('images/logo.png')?><!--" alt="Clean UI Admin Template" />-->
+           <span
+           style="
+                text-align: center;
+                font-size: 21px;
+                color : #FFF;
+                width: 100%; height: auto; position: relative; float: left;
+                margin-top: 10px;
+                margin-left: 20px;
+            "> ADMIN PANEL </span>
         </a>
     </div>
     <div class="left-menu-inner scroll-pane">

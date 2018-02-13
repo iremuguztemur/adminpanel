@@ -1,23 +1,25 @@
 <?php
 
 $id = $_POST['exdata']['id'];
+$module = $_POST['exdata']['module'];
 
 $nm = sha1(md5(microtime().rand(1,999999))).'.jpg';
-$img =  _base."/upload/products/normal/".$nm;
-$imgT = _base."/upload/products/thumb/".$nm;
+$img =  _base."/upload/".$nm;
+$imgT = _base."/upload/thumb/".$nm;
 
 if($_POST){
 
 	$data = array();
+	$data['module'] = $module;
 	$data['gallery_id'] = $id;
 	$data['image_name'] = $nm;
 	$data['url'] = "";
-	$data['add_date'] = "";
+	$data['add_date'] = date("Y-m-d H:s:i");
 
 	$query = $db->insert("img_library")
 		->set($data);
 
-	if($query){
+	if( $query ){
 		base64_to_jpeg($_POST['src'],$img);
 		echo 'basarili';
 	}else{
@@ -51,14 +53,10 @@ function base64_to_jpeg($base64_string, $output_file) { global $imgT,$img;
 	$new_width = $width * $percent;
 	$new_height = $height * $percent;
 
-
-
 	// Resample
 	$image_p = imagecreatetruecolor($new_width, $new_height);
 	$image = imagecreatefromjpeg($filename);
 	imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-
-
 
 	// Output
 	imagepng($image_p, $imgT);

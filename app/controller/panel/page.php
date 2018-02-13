@@ -5,7 +5,7 @@ if(!file_exists(panel_view($_url[1]))){
 }else{
 	$page = $_url[1];
 }
-	$catList = $db->select("page_categori")->orderby("categori_id","DESC")->run();
+	$catList = $db->select("page_categories")->orderby("id","DESC")->run();
 if( isset( $_url[2] ) ){
 
 	$getid = url(2);
@@ -14,17 +14,16 @@ if( isset( $_url[2] ) ){
 	$x = explode("-",$r)[0];
 	$id = substr($x,4);
 if($id == ''){
-	$pagelist = $db->select("page")->run();
+	$pagelist = $db->select("pages")->run();
 }else{
-	$pagelist = $db->select("page")->where("categori_id",$id)->run();
+	$pagelist = $db->select("pages")->where("categories",$id)->run();
 }
-
-	$subList = $db->select("page_categori")->where("categori_id",$id)->run(true);
-  $cat_id = $subList['categori_id'];
+  $subList = $db->select("page_categories")->where("id",$id)->run(true);
+  $cat_id = $subList['id'];
 
 }else{
 	# page List Call
-	$pagelist = $db->select("page")->run();
+	$pagelist = $db->select("pages")->run();
 }
 
 # call header

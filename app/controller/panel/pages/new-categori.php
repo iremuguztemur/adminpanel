@@ -6,35 +6,38 @@ if(!file_exists( panel_view( url(1)."/".url(2) ) )){
 	$page = $_url[1]."/".$_url[2];
 };
 if( $_POST ){
-	$cb = array();
-	$sira = 0;
-	$number =  $db->select("page_categori")->orderby("categori_id", "DESC")->run(true);
+    $cb = array();
+    $sira = 0;
+    $number =  $db->select("page_categories")->orderby("id", "DESC")->run(true);
 
-	if( $number )
-		$sira = $number['categori_sira'];
+    if( $number ){
+        $sira = $number['number'];
+    }else{
+        $sira = 0;
+    }
 
-	$v = array();
-		$v['categori_name'] = htmlspecialchars(post("categori_name"));
-		$v['categori_image'] = htmlspecialchars(post("images"));
-		$clear = str_replace("amp","",$v['categori_name']);
-		$v['categori_self'] = permalink($clear);
-		$v['categori_description'] = htmlspecialchars(post("categori_description"));
-		$v['stats'] = 1;
-		$v['categori_sira'] = $sira;
+    $v = array();
+    $v['title'] = htmlspecialchars(post("title"));
+    $clear = str_replace("amp","",$v['title']);
+    $v['slug'] = permalink($clear);
+    $v['image'] = htmlspecialchars(post("images"));
+    $v['description'] = htmlspecialchars(post("description"));
+    $v['body'] = htmlspecialchars(post("body"));
+    $v['isActive'] = 1;
+    $v['number'] = $sira;
 
-		if($v['categori_name'] != ''){
-			$insert = $db->insert("page_categori")->set($v);
-
-			if( $insert ){
-				$cb['err']['title'] = "Başarılı.";
-				$cb['err']['message'] = "Kategori başarılı bir şekilde eklenmiştir.";
-				$cb['err']['type'] = "success";
-			}else{
-				$cb['err']['title'] = "Hata !";
-				$cb['err']['message'] = "Kategori ekleme sırasında bir hata oluştu.";
-				$cb['err']['type'] = "danger";
-			}
-		}
+    if($v['title'] != ''){
+        $insert = $db->insert("page_categories")->set($v);
+        if( $insert ){
+            $cb['err']['title'] = "Başarılı.";
+            $cb['err']['message'] = "Kategori başarılı bir şekilde eklenmiştir.";
+            $cb['err']['type'] = "success";
+        }else{
+            $cb['err']['title'] = "Hata !";
+            $cb['err']['message'] = "Kategori ekleme sırasında bir hata oluştu.";
+            $cb['err']['type'] = "danger";
+        }
+    }
 }
 # call header
 require panel_statics("header");

@@ -26,8 +26,8 @@
       					<?php
       					foreach($pagelist as $pl ){
       						// img control
-      						if($pl['categori_image'] != ''){
-      							$imgx = explode(",",$pl['categori_image'])[0];
+      						if($pl['image'] != ''){
+      							$imgx = explode(",",$pl['image'])[0];
       							$image = $db->select("img_library")
       									 ->where("img_id", $imgx)
       									 ->run(true);
@@ -36,14 +36,14 @@
       							$img = 'https://placeholdit.imgix.net/~text?txtsize=10&txt=Grup%20Resmi%20bulunamad%C4%B1&w=80&h=70';
       						};
       						// stats control
-      						if($pl['stats'] == 1){
+      						if($pl['isActive'] == 1){
       							$stat = '<span class="label label-success">aktif</span>';
-      						}elseif($pl['stats'] == 2){
+      						}elseif($pl['isActive'] == 2){
       							$stat = '<span class="label label-warning">taslak</span>';
       						}else {
       							$stat = '<span class="label label-danger">pasif</span>';
       						};
-      						$id = "categori_".mbs_rand(4).$pl['categori_id']."-".mbs_rand(4);
+      						$id = "categori_".mbs_rand(4).$pl['id']."-".mbs_rand(4);
       						/*
       							---> examle securty id parse  |
       							------------------------------|
@@ -53,18 +53,21 @@
       						*/
       					?>
       					<tr height="30">
-      						<td><img src="<?=$img?>" class="img-responsive" alt="<?=$pl['categori_name']?>"></td>
-      						<td><?=$pl['categori_name']?></td>
+      						<td><img src="<?=$img?>" class="img-responsive" alt="<?=$pl['title']?>"></td>
+      						<td><?=$pl['title']?></td>
       						<td><?=$stat?></td>
       						<td class="text-right">
-      							<a href="<?=panel_url()?>pages/<?php if($pl['stats'] != '1'){ echo "categori_active"; }else{ echo "categori_passive"; }; ?>/<?=$id?>" class="label label-warning" style="padding:4px 5px;" title="<?php if($pl['stats'] != '1'){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
-      							<?php if($pl['stats'] != '1'){ ?>
+      							<a
+                                    href="<?=panel_url()?>pages/<?php if($pl['isActive'] != '1'){ echo "categori_active"; }else{ echo "categori_passive"; }; ?>/<?=$id?>"
+                                    class="label label-warning"
+                                    style="padding:4px 5px;" title="<?php if($pl['isActive'] != '1'){ echo "Aktif Yap"; }else{ echo "Pasif Yap"; }; ?>">
+      							<?php if($pl['isActive'] != '1'){ ?>
       								<i class="fa fa-eye"></i>
       							<?php }else { ?>
       								<i class="fa fa-eye-slash"></i>
       							<?php }; ?>
       							</a>
-      							<a href="<?=panel_url()?>page/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Ürün Listesi">
+      							<a href="<?=panel_url()?>page/<?=$id?>" class="label label-primary" style="margin-left:3px; padding:4px 5px;" title="Sayfa Listesi">
       								<i class="fa fa-list"></i>
       							</a>
       							<a href="<?=panel_url()?>pages/categori-edit/<?=$id?>" class="label label-info" style="margin-left:3px; padding:4px 5px;" title="Düzenle">

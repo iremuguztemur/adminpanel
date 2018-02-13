@@ -1,9 +1,9 @@
 <?php
 
 if(!file_exists(view($modal))){
-  	$page = '404';
+    $page = '404';
 }else{
-	$page = $modal;
+    $page = $modal;
 }
 
 # call header

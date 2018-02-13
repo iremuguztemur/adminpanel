@@ -13,9 +13,9 @@ if(url(3)) {
 	$x = explode("-", $r)[0];
 	$run = substr($x, 4);
 	$arr = array();
-	$sei =  $db->select("page_categori")->where("categori_id", $run)->run(true);
+	$sei =  $db->select("page_categories")->where("id", $run)->run(true);
 	if(!isset($sei)){
-		header("Location:".panel_url("page-categori"));
+		header("Location:".panel_url("page-categories"));
 	}
 }
 
@@ -24,14 +24,16 @@ if( $_POST ){
 	$sira = 0;
 
 	$v = array();
-	$v['categori_name'] = htmlspecialchars(post("categori_name"));
-	$clear = str_replace("amp","",$v['categori_name']);
-	$v['categori_self'] = permalink($clear);
-	$v['categori_image'] = htmlspecialchars(trim($_POST['images']));
-	$v['stats'] = $sei['stats'];
-	$v['categori_sira'] = $sei['categori_sira'];
-	if($v['categori_name'] != ''){
-		$update = $db->update("page_categori")->where("categori_id",$run)->set($v);
+	$v['title'] = htmlspecialchars(post("title"));
+	$clear = str_replace("amp","",$v['title']);
+	$v['slug'] = permalink($clear);
+	$v['image'] = htmlspecialchars(trim($_POST['images']));
+	$v['description'] = post("description");;
+	$v['body'] = post("body");;
+	$v['isActive'] = $sei['isActive'];
+	$v['number'] = $sei['number'];
+	if($v['title'] != ''){
+		$update = $db->update("page_categories")->where("id",$run)->set($v);
 
 		if( $update ){
 			$cb['err']['title'] = "Başarılı.";

@@ -6,21 +6,23 @@
             </div>
             <div class="panel-body">
               <div class="col-md-12">
-                  <h4>Filtrele :</h4>
-                  <hr>
                   <div class="row">
-                      <div class="col-md-3">
-                        <label for="kategori">Sayfa Kategorisi</label>
-                          <select class="form-control" name="page_categori" id="page_categori">
-                              <option value="#">Sayfa Kategorisini Seçin</option>
-                              <?php foreach ($catList as $pl){ ?>
-                                    <?php if(isset($_url[2])){ ?>
-                                        <option value="<?=$pl['categori_id']?>" <?=$pl['categori_id'] == $id ? "selected" : "";?>  ><?=$pl['categori_name']?></option>
-                                    <?php }else { ?>
-                                        <option value="<?=$pl['categori_id']?>"><?=$pl['categori_name']?></option>
-                                    <?php }; ?>
-                              <?php }; ?>
-                          </select>
+                      <h4>Filtrele :</h4>
+                      <hr>
+                      <div class="row">
+                          <div class="col-md-3">
+                              <label for="kategori">Sayfa Kategorisi</label>
+                              <select class="form-control" name="page_categori" id="page_categori">
+                                  <option value="#">Sayfa Kategorisini Seçin</option>
+                                  <?php foreach ($catList as $pl){ ?>
+                                      <?php if(isset($_url[2])){ ?>
+                                          <option value="<?=$pl['id']?>" <?=$pl['id'] == $id ? "selected" : "";?>  ><?=$pl['title']?></option>
+                                      <?php }else { ?>
+                                          <option value="<?=$pl['id']?>"><?=$pl['title']?></option>
+                                      <?php }; ?>
+                                  <?php }; ?>
+                              </select>
+                          </div>
                       </div>
                   </div>
               </div>
@@ -52,7 +54,7 @@
       						}else {
       							$stat = '<span class="label label-danger">pasif</span>';
       						};
-      						$idx = "page_".mbs_rand(4).$pl['page_id']."-".mbs_rand(4);
+      						$idx = "page_".mbs_rand(4).$pl['id']."-".mbs_rand(4);
       						/*
       							---> examle securty id parse  |
       							------------------------------|

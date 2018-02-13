@@ -4,8 +4,6 @@ if(!url(1)){
 	$_url[1] = 'index';
 };
 
-
-
 $config['menu'] = [
 	'pages' => [
     'title' => 'Sayfalar',
@@ -22,21 +20,21 @@ $config['menu'] = [
       ]
     ]
   ],
-  'products' => [
-    'title' => 'Ürünler',
-    'icon' => 'icmn-store',
-    'submenu' => [
-			'product-categori' => [
-				'title' => 'Ürün kategorisi'
-			],
-      'products' => [
-        'title' => 'Ürün listesi'
-      ],
-      'product/new-product' => [
-        'title' => 'Yeni Ekle'
-      ]
-    ]
-  ],
+//  'products' => [
+//    'title' => 'Ürünler',
+//    'icon' => 'icmn-store',
+//    'submenu' => [
+//			'product-categori' => [
+//				'title' => 'Ürün kategorisi'
+//			],
+//      'products' => [
+//        'title' => 'Ürün listesi'
+//      ],
+//      'product/new-product' => [
+//        'title' => 'Yeni Ekle'
+//      ]
+//    ]
+//  ],
   'banners' => [
     'title' => 'Banner Yönetimi',
     'icon' => 'icmn-image-compare',

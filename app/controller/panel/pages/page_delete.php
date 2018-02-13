@@ -9,10 +9,10 @@ if(url(3)){
 		'stats' => 1
 	);
 
-	$sl = $db->select("page")->where("page_id",$run)->run(true);
-	$catid = "categori_".mbs_rand(4).$sl['categori_id']."-".mbs_rand(4);
+	$sl = $db->select("pages")->where("id",$run)->run(true);
+	$catid = "categori_".mbs_rand(4).$sl['categories']."-".mbs_rand(4);
 
-	$delete = $db->delete("page")->where("page_id",$run)->done();
+	$delete = $db->delete("pages")->where("id",$run)->done();
 	if( $delete ){
 		header("Location: ".panel_url("page/".$catid."/basarili"));
 	}else{
