@@ -1,4 +1,3 @@
-# PHP Yönetim Paneli
 > ## KULLANIMI
 * Birinci adım : `` clone repository ``
 
@@ -27,5 +26,6 @@ $config['db'] = [
 ```
 username: admin
 password: 123456
-
 ```
+
+tebrikler artık kullanıp geliştirebilirsiniz 💪🏼
