@@ -6,10 +6,13 @@ if(!file_exists(panel_view($_url[1]."/".$_url[2]))){
 	$page = $_url[1]."/".$_url[2];
 }
 $group_list =  $db->select("product_categori")->orderby("categori_id", "ASC")->run();
-$pr_id = $db->select("img_library")->orderby("img_id","DESC")->run(true);
+//$pr_id = $db->select("img_library")->orderby("img_id","DESC")->run(true);
+
+$pr_id = $db->select("products")->orderby("product_id", "DESC")->run(true);
+
 
 if($pr_id){
-	$ximgid = $pr_id['img_id'] + 1;
+	$ximgid = $pr_id['product_id'] + 1;
 }else{
 	$ximgid = 1;
 }
@@ -41,12 +44,12 @@ if( $_POST ){
 		$insert = $db->insert("products")->set($vbx);
 		if( $insert ){
 			$cb['err']['title'] = "Başarılı : ";
-			$cb['err']['message'] = "Kategori başarılı bir şekilde eklenmiştir.";
+			$cb['err']['message'] = "Ürün başarılı bir şekilde eklenmiştir.";
 			$cb['err']['type'] = "success";
 			$cb['err']['catID'] = post('categori_id');
 		}else{
 			$cb['err']['title'] = "Hata : ";
-			$cb['err']['message'] = "Kategori ekleme sırasında bir hata oluştu.";
+			$cb['err']['message'] = "Ürün ekleme sırasında bir hata oluştu.";
 			$cb['err']['type'] = "danger";
 			if(isset( $_POST['categori_id'] ) ){
 				$cb['err']['catID'] = post('categori_id');

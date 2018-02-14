@@ -46,12 +46,12 @@ if( $_POST ){
 		$update = $db->update("products")->where("product_id",$run)->set($vbx);
 		if( $update ){
 			$cb['err']['title'] = "Başarılı : ";
-			$cb['err']['message'] = "Kategori başarılı bir şekilde güncellenmiştir.";
+			$cb['err']['message'] = "Ürün başarılı bir şekilde güncellenmiştir.";
 			$cb['err']['type'] = "success";
 			$cb['err']['catID'] = post('categori_id');
 		}else{
 			$cb['err']['title'] = "Hata : ";
-			$cb['err']['message'] = "Kategori güncelleme sırasında bir hata oluştu.";
+			$cb['err']['message'] = "Ürün güncelleme sırasında bir hata oluştu.";
 			$cb['err']['type'] = "danger";
 			if(isset( $_POST['categori_id'] ) ){
 				$cb['err']['catID'] = post('categori_id');

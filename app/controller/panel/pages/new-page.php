@@ -6,14 +6,14 @@ if(!file_exists(panel_view($_url[1]."/".$_url[2]))){
 	$page = $_url[1]."/".$_url[2];
 }
 $group_list =  $db->select("page_categories")->orderby("id", "ASC")->run();
-$pr_id = $db->select("img_library")->orderby("img_id","DESC")->run(true);
+$pr_id = $db->select("pages")->orderby("id", "DESC")->run(true);
+
 
 if($pr_id){
-	$ximgid = $pr_id['img_id'] + 1;
+    $ximgid = $pr_id['product_id'] + 1;
 }else{
-	$ximgid = 1;
+    $ximgid = 1;
 }
-
 
 if( $_POST ){
 

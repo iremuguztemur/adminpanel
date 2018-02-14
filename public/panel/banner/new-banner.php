@@ -3,29 +3,17 @@
     <section class="page-content-inner">
         <section class="panel panel-with-borders col-md-9">
             <div class="panel-heading">
-                <h3>Ürün Ekle</h3>
+                <h3>Banner Ekle</h3>
             </div>
             <form action="" method="post">
             <div class="panel-body">
         				<form name="sayfa_form" action="" method="post" id="form1">
                       <div class="row">
-<!--                        <div class="form-group">-->
-<!--                          <select class="form-control" name="categori_id">-->
-<!--                            <option value="0">Kategori Seçiniz..</option>-->
-<!--                            --><?php //foreach ($group_list as $gl) { ?>
-<!--                                <option value="--><?//=$gl['categori_id']?><!--">--><?//=$gl['categori_name']?><!--</option>-->
-<!--                            --><?php //} ?>
-<!--                          </select>-->
-<!--                        </div>-->
-                          <input type="hidden" name="categori_id" value="1">
                         <div class="form-group">
-                          <input type="text" name="product_name" class="form-control" value="" placeholder="Ürün Adı">
+                          <input type="text" name="title" class="form-control" value="" placeholder="Başlık">
                         </div>
                         <div class="form-group">
-                          <textarea name="product_description" class="form-control" rows="8" cols="80" placeholder="Açıklama"></textarea>
-                        </div>
-                        <div class="form-group">
-                          <textarea name="product_text" class="summernote" rows="8" cols="80" placeholder="Açıklama"></textarea>
+                          <textarea name="description" class="form-control" rows="8" cols="80" placeholder="Açıklama"></textarea>
                         </div>
                         <div class="form-group col-md-1">
                           <div class="row">
@@ -39,19 +27,6 @@
                         </div>
                         <div class="form-group col-md-11">
                             <input type="text" style="min-height : 40px; box-shadow : none;" name="link_url" class="form-control input-link" disabled value="" placeholder="LINK URL">
-                        </div>
-                        <div class="form-group col-md-1">
-                          <div class="row">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default-outline link"  style="border-radius: 0;">
-                                    <input type="checkbox" name="video" value="1">
-                                    Video
-                                </label>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group col-md-11">
-                            <input type="text" style="min-height : 40px; box-shadow : none;" name="video_url" class="form-control disabled" disabled value="" placeholder="VIDEO URL">
                         </div>
                       </div>
 	                </form>
@@ -126,53 +101,21 @@ $(document).ready(function () {
             $("input[name='"+ inputName +"_url']").attr("disabled","disabled");
         };
     });
-    /* --------- */
 
-    $("select#groupid").on("change",function(){
-        $("#categori_id").removeAttr("disabled");
-        var id = {
-            'group_id' : $(this).val()
-        };
-        $.post("<?=panel_url("product/list_categori")?>",id,function(callback){
-            if(callback != ''){
-                $("#categori_id").html("<option value=''>Kategori Seçiniz</option>").append(callback);
-            }
-        })
-    });
-
-    /* --------- */
-
-    $("select#categori_id").on("change",function(){
-        $("#subcategori_id").removeAttr("disabled");
-        var id = {
-            'categori_id' : $(this).val()
-        };
-        $id = "categori_<?=mbs_rand(4)?>" + id.categori_id + "-<?=mbs_rand(4)?>";
-        $.post("<?=panel_url("product/list_subcategori")?>",id,function(callback){
-            if(callback != ''){
-                $("#subcategori_id").html("<option value=''>Alt Kategori Seçiniz</option>").append(callback);
-                $(".redirect_link").remove();
-            }else{
-                $(".redirect_link").remove();
-                $("#subcategori_id").html("<option value=''>Alt Kategori Bulunamadı</option>").parent().append("<a href='<?=panel_url("product-subcategori")?>/" + $id + "' class='redirect_link' title=''>Alt Kategori Eklemek için Tıklayınız.</a>");
-            }
-            console.log(callback);
-        })
-    });
     var myUp = $('#image_content').clupload({
-        width : 1300,
-        height : 700,
-        thumbRatio : 6,
+        width : 1920,
+        height : 1080,
+        thumbRatio : 2.35,
         background : '#fff',
         quality : 100,
         file : {
-            max : 6,
-            maxSize : 1021, // kb
+            max : 1,
+            maxSize : 5000 // kb
         },
         name: '',
         imageUpload : {
             url: '<?=panel_url("image-upload")?>',
-            exData: {id :  '<?=$ximgid?>', module: "product"}
+            exData: {id :  '<?=$ximgid?>', module: "banner"}
         },
         success: function(form) {
             $("#dismis-modal").trigger("click");
@@ -195,7 +138,7 @@ $(document).ready(function () {
         type: '<?=$cb["err"]["type"]?>'
     });
     setTimeout(function () {
-        location.href = '<?=panel_url("products/"."categori_".mbs_rand(4).$cb['err']['catID']."-".mbs_rand(4))?>';
+        location.href = '<?=panel_url("banners/"."categori_".mbs_rand(4).$cb['err']['catID']."-".mbs_rand(4))?>';
     },1500);
 
 })

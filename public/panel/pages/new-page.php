@@ -171,7 +171,7 @@ $(document).ready(function () {
         name: '',
         imageUpload : {
             url: '<?=panel_url("image-upload")?>',
-            exData: {id :  '<?=$ximgid?>'}
+            exData: {id :  '<?=$ximgid?>', module : "page"}
         },
         success: function(form) {
         },

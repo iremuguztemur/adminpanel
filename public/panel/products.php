@@ -8,21 +8,21 @@
               <div class="col-md-12">
                   <h4>Filtrele :</h4>
                   <hr>
-                  <div class="row">
-                      <div class="col-md-3">
-                        <label for="kategori">Ürün Kategorisi</label>
-                          <select class="form-control" name="product_categori" id="product_categori">
-                              <option value="#">Ürün Kategorisini Seçin</option>
-                              <?php foreach ($catList as $pl){ ?>
-                                    <?php if(isset($_url[2])){ ?>
-                                        <option value="<?=$pl['categori_id']?>" <?=$pl['categori_id'] == $id ? "selected" : "";?>  ><?=$pl['categori_name']?></option>
-                                    <?php }else { ?>
-                                        <option value="<?=$pl['categori_id']?>"><?=$pl['categori_name']?></option>
-                                    <?php }; ?>
-                              <?php }; ?>
-                          </select>
-                      </div>
-                  </div>
+<!--                  <div class="row">-->
+<!--                      <div class="col-md-3">-->
+<!--                        <label for="kategori">Ürün Kategorisi</label>-->
+<!--                          <select class="form-control" name="product_categori" id="product_categori">-->
+<!--                              <option value="#">Ürün Kategorisini Seçin</option>-->
+<!--                              --><?php //foreach ($catList as $pl){ ?>
+<!--                                    --><?php //if(isset($_url[2])){ ?>
+<!--                                        <option value="--><?//=$pl['categori_id']?><!--" --><?//=$pl['categori_id'] == $id ? "selected" : "";?><!--  >--><?//=$pl['categori_name']?><!--</option>-->
+<!--                                    --><?php //}else { ?>
+<!--                                        <option value="--><?//=$pl['categori_id']?><!--">--><?//=$pl['categori_name']?><!--</option>-->
+<!--                                    --><?php //}; ?>
+<!--                              --><?php //}; ?>
+<!--                          </select>-->
+<!--                      </div>-->
+<!--                  </div>-->
               </div>
       				<table class="table table-hover nowrap" id="sayfalar" width="100%">
       					<thead>

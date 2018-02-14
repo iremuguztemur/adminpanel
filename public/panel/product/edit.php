@@ -9,18 +9,18 @@
             <div class="panel-body">
         				<form name="sayfa_form" action="" method="post" id="form1">
                       <div class="row">
-                        <div class="form-group">
-                          <select class="form-control" name="categori_id">
-                            <option value="0">Kategori Seçiniz..</option>
-                            <?php foreach ($group_list as $pl){ ?>
-                                  <?php if(isset($_url[3])){ ?>
-                                      <option value="<?=$pl['categori_id']?>" <?=$pl['categori_id'] == $edit['categori_id'] ? "selected" : "";?>  ><?=$pl['categori_name']?></option>
-                                  <?php }else { ?>
-                                      <option value="<?=$pl['categori_id']?>"><?=$pl['categori_name']?></option>
-                                  <?php }; ?>
-                            <?php }; ?>
-                          </select>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                          <select class="form-control" name="categori_id">-->
+<!--                            <option value="0">Kategori Seçiniz..</option>-->
+<!--                            --><?php //foreach ($group_list as $pl){ ?>
+<!--                                  --><?php //if(isset($_url[3])){ ?>
+<!--                                      <option value="--><?//=$pl['categori_id']?><!--" --><?//=$pl['categori_id'] == $edit['categori_id'] ? "selected" : "";?><!--  >--><?//=$pl['categori_name']?><!--</option>-->
+<!--                                  --><?php //}else { ?>
+<!--                                      <option value="--><?//=$pl['categori_id']?><!--">--><?//=$pl['categori_name']?><!--</option>-->
+<!--                                  --><?php //}; ?>
+<!--                            --><?php //}; ?>
+<!--                          </select>-->
+<!--                        </div>-->
                         <div class="form-group">
                           <input type="text" name="product_name" class="form-control" value="<?=$edit['product_name']?>" placeholder="Ürün Adı">
                         </div>
@@ -75,9 +75,9 @@
 				<div class="panel-body">
 					<div class="row">
 						<ul class="list-group">
-							<a class="list-group-item" href="#add_image"  data-toggle="modal" data-target="#myModal"><i class="fa fa-picture-o margin-right-10"></i>Fotoğraf Ekle</a>
-							<a class="list-group-item" href="#add_gallery"><i class="fa fa-book margin-right-10"></i>Galeri Ekle</a>
-							<a class="list-group-item" href="#add_documents"><i class="fa fa-paperclip margin-right-10"></i>Dosya Ekle</a>
+                            <a class="list-group-item" href="#add_image"  data-toggle="modal" data-target="#myModal"><i class="fa fa-picture-o margin-right-10"></i>Fotoğraf Ekle</a>
+                            <a class="list-group-item" id="list-photos" data-toggle="modal" data-target="#ListModal"><i class="fa fa-book margin-right-10"></i>Fotoğraflar</a>
+                            <!--							<a class="list-group-item" href="#add_documents"><i class="fa fa-paperclip margin-right-10"></i>Dosya Ekle</a>-->
 						</ul>
 					</div>
 				</div>
@@ -107,8 +107,60 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" id="ListModal" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 margin-bottom-15" id="ImageContent">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
 $(document).ready(function () {
+
+    $("#list-photos").on("click", function () {
+        $urlImageLoad = '<?=panel_url("image-list")?>';
+        $urlImageDelete = '<?=panel_url("image-delete")?>';
+        dataImageGallery = {id :  '<?=$ximgid?>', module: "product"};
+        $.post($urlImageLoad,dataImageGallery,function (res) {
+            $("#ImageContent").html(res);
+            $(".delete-this").on("click",function () {
+                $id = $(this).data("id");
+                $item = $(this);
+                swal({
+                    title: "Fotoğrafı Silmek Üzeresiniz",
+                    text: "Bu fotoğrafı silmek istediğinizden eminmisiniz ? ",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Evet, Sil",
+                    cancelButtonText: "İptal",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function(isConfirm){
+                    if (isConfirm) {
+                        dataDeleteImage = {id : $id, module: "page"};
+                        $.post($urlImageDelete,dataDeleteImage, function (res) {
+                            $item.parent().parent().remove("div");
+                            swal("Başarılı", "Fotoğrafi başarılı bir şekilde sildiniz", "success");
+                        });
+                    } else {
+                        swal("İptal Edildi", "Fotoğraf Silme İptal Edildi", "error");
+                    }
+                });
+            });
+        });
+    });
 
     $('.summernote').summernote({
         height: 220,
@@ -138,39 +190,6 @@ $(document).ready(function () {
       $("#product_link").trigger("click");
     <?php }; ?>
 
-    /* --------- */
-
-    $("select#groupid").on("change",function(){
-        $("#categori_id").removeAttr("disabled");
-        var id = {
-            'group_id' : $(this).val()
-        };
-        $.post("<?=panel_url("product/list_categori")?>",id,function(callback){
-            if(callback != ''){
-                $("#categori_id").html("<option value=''>Kategori Seçiniz</option>").append(callback);
-            }
-        })
-    });
-
-    /* --------- */
-
-    $("select#categori_id").on("change",function(){
-        $("#subcategori_id").removeAttr("disabled");
-        var id = {
-            'categori_id' : $(this).val()
-        };
-        $id = "categori_<?=mbs_rand(4)?>" + id.categori_id + "-<?=mbs_rand(4)?>";
-        $.post("<?=panel_url("product/list_subcategori")?>",id,function(callback){
-            if(callback != ''){
-                $("#subcategori_id").html("<option value=''>Alt Kategori Seçiniz</option>").append(callback);
-                $(".redirect_link").remove();
-            }else{
-                $(".redirect_link").remove();
-                $("#subcategori_id").html("<option value=''>Alt Kategori Bulunamadı</option>").parent().append("<a href='<?=panel_url("product-subcategori")?>/" + $id + "' class='redirect_link' title=''>Alt Kategori Eklemek için Tıklayınız.</a>");
-            }
-            console.log(callback);
-        })
-    });
     var myUp = $('#image_content').clupload({
         width : 1300,
         height : 700,
@@ -184,9 +203,11 @@ $(document).ready(function () {
         name: '',
         imageUpload : {
             url: '<?=panel_url("image-upload")?>',
-            exData: {id :  '<?=$ximgid?>'}
+            exData: {id :  '<?=$ximgid?>', module: "product"}
         },
         success: function(form) {
+            $("#dismis-modal").trigger("click");
+            myUp.reset();
         },
         error: function(data) {
             console.log(data);
